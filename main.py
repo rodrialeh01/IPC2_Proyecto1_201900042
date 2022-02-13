@@ -13,12 +13,12 @@ def AbrirArchivo(ruta):
     if ruta !="":
         archivo1 =  et.parse(ruta)
         root = archivo1.getroot()
-        print(root)
+        #print(root)
 
         LP = Lista_Pisos()        
         
         for element in root:
-            print(element.attrib)
+            #print(element.attrib)
             nombre = element.attrib.get('nombre')
             r = element[0].text
             c = element[1].text
@@ -28,18 +28,10 @@ def AbrirArchivo(ruta):
             for subelement in element:
                 if subelement.tag == "patrones":
                     for subsubelement in subelement:
-                        print(subsubelement.tag, ' ', subsubelement.attrib, ' : ', subsubelement.text)
+                        #print(subsubelement.tag, ' ', subsubelement.attrib, ' : ', subsubelement.text)
                         np = subsubelement.attrib.get('codigo')
                         pp = subsubelement.text
                         L.InsertaralFinal(Patron(np,pp))
-                else:
-                    #fila = subelement.text[0]
-                    #columna = subelement.text[1]
-                    #f = subelement.text[2]
-                    #s = subelement.text[3]
-                    #nuevo = Piso(nombre, fila, columna,f,s,'p')
-                    #L.InsertaralFinal(nuevo)
-                    print(subelement.tag, ' : ',subelement.text)
             LP.InsertaralFinal(Piso(nombre,r,c,f,s,L))
 
         LP.mostrarLista()
