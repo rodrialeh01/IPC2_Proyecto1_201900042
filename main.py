@@ -3,6 +3,11 @@ from tkinter import filedialog
 from lxml import etree as xp
 from xml.etree import ElementTree as et
 
+from Lista_Pisos import Lista_Pisos
+from Piso import Piso
+from Lista_Patron import Lista_Patron
+from Patron import Patron
+
 #ABRIENDO EL ARCHIVO Y VER SU CONTENIDO
 def AbrirArchivo(ruta):
     if ruta !="":
@@ -10,14 +15,35 @@ def AbrirArchivo(ruta):
         root = archivo1.getroot()
         print(root)
 
+        LP = Lista_Pisos()
+        L = Lista_Patron()
+        
         for element in root:
             print(element.attrib)
+            nombre = element.attrib.get('nombre')
+            r = element[0].text
+            c = element[1].text
+            f = element[2].text
+            s = element[3].text            
             for subelement in element:
                 if subelement.tag == "patrones":
                     for subsubelement in subelement:
                         print(subsubelement.tag, ' ', subsubelement.attrib, ' : ', subsubelement.text)
+                        np = subsubelement.attrib.get('codigo')
+                        pp = subsubelement.text
+                        L.InsertaralFinal(Patron(np,pp))
                 else:
-                    print(subelement.tag, ' : ', subelement.text)
+                    #fila = subelement.text[0]
+                    #columna = subelement.text[1]
+                    #f = subelement.text[2]
+                    #s = subelement.text[3]
+                    #nuevo = Piso(nombre, fila, columna,f,s,'p')
+                    #L.InsertaralFinal(nuevo)
+                    print(subelement.tag, ' : ',subelement.text)
+            LP.InsertaralFinal(Piso(nombre,r,c,f,s,L))
+
+        LP.mostrarLista()
+
     else:
         print('== NO SE CARGÓ NINGUN ARCHIVO                     ==')
 
