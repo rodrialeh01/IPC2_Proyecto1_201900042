@@ -1,12 +1,23 @@
 import tkinter as tk
 from tkinter import filedialog
+from lxml import etree as xp
+from xml.etree import ElementTree as et
 
 #ABRIENDO EL ARCHIVO Y VER SU CONTENIDO
 def AbrirArchivo(ruta):
     if ruta !="":
-        archivo = open(ruta,'r')
-        conarchivo = archivo.read()
-        print(conarchivo)
+        archivo1 =  et.parse(ruta)
+        root = archivo1.getroot()
+        print(root)
+
+        for element in root:
+            print(element.attrib)
+            for subelement in element:
+                if subelement.tag == "patrones":
+                    for subsubelement in subelement:
+                        print(subsubelement.tag, ' ', subsubelement.attrib, ' : ', subsubelement.text)
+                else:
+                    print(subelement.tag, ' : ', subelement.text)
     else:
         print('== NO SE CARGÓ NINGUN ARCHIVO                     ==')
 
