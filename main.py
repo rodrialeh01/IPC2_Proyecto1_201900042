@@ -15,8 +15,7 @@ def AbrirArchivo(ruta):
         root = archivo1.getroot()
         print(root)
 
-        LP = Lista_Pisos()
-        L = Lista_Patron()
+        LP = Lista_Pisos()        
         
         for element in root:
             print(element.attrib)
@@ -24,7 +23,8 @@ def AbrirArchivo(ruta):
             r = element[0].text
             c = element[1].text
             f = element[2].text
-            s = element[3].text            
+            s = element[3].text  
+            L = Lista_Patron()          
             for subelement in element:
                 if subelement.tag == "patrones":
                     for subsubelement in subelement:
