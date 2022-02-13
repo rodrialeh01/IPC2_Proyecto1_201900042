@@ -19,7 +19,8 @@ class Lista_Patron:
 
     def mostrarLista(self):
         actual = self.cabeza
-        while(actual!=None):
+        print('Hay ', self.tamaño, ' patrones')
+        for i in range(self.tamaño):
             print('Nombre Patron: ',str(actual.data.nombre))
             print('Patron: ',str(actual.data.patron))
             print('--------------------------------------------------')

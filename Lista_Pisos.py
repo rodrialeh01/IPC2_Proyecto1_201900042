@@ -19,7 +19,8 @@ class Lista_Pisos:
 
     def mostrarLista(self):
         actual = self.cabeza
-        while(actual!=None):
+        print('Hay ', self.tamaño, ' pisos')
+        for i in range(self.tamaño):
             print('Nombre: ',str(actual.data.nombre))
             print('Columna: ',str(actual.data.columna))
             print('Fila: ',str(actual.data.fila))

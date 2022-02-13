@@ -1,6 +1,5 @@
 import tkinter as tk
 from tkinter import filedialog
-from lxml import etree as xp
 from xml.etree import ElementTree as et
 
 from Lista_Pisos import Lista_Pisos
@@ -8,14 +7,15 @@ from Piso import Piso
 from Lista_Patron import Lista_Patron
 from Patron import Patron
 
+LP = Lista_Pisos()
+
 #ABRIENDO EL ARCHIVO Y VER SU CONTENIDO
 def AbrirArchivo(ruta):
+    global LP
     if ruta !="":
         archivo1 =  et.parse(ruta)
         root = archivo1.getroot()
-        #print(root)
-
-        LP = Lista_Pisos()        
+        #print(root)    
         
         for element in root:
             #print(element.attrib)
@@ -30,7 +30,7 @@ def AbrirArchivo(ruta):
                     for subsubelement in subelement:
                         #print(subsubelement.tag, ' ', subsubelement.attrib, ' : ', subsubelement.text)
                         np = subsubelement.attrib.get('codigo')
-                        pp = subsubelement.text
+                        pp = subsubelement.text.strip()
                         L.InsertaralFinal(Patron(np,pp))
             LP.InsertaralFinal(Piso(nombre,r,c,f,s,L))
 
