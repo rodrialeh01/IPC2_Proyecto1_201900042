@@ -3,10 +3,6 @@ from tkinter import filedialog
 from xml.etree import ElementTree as et
 
 from Lista_Pisos import Lista_Pisos
-from Piso import Piso
-from Lista_Patron import Lista_Patron
-from Patron import Patron
-
 LP = Lista_Pisos()
 
 #ABRIENDO EL ARCHIVO Y VER SU CONTENIDO
@@ -20,22 +16,23 @@ def AbrirArchivo(ruta):
         for element in root:
             #print(element.attrib)
             nombre = element.attrib.get('nombre')
-            r = element[0].text
-            c = element[1].text
-            f = element[2].text
-            s = element[3].text  
-            L = Lista_Patron()          
+            r = element[0].text.strip()
+            c = element[1].text.strip()
+            f = element[2].text.strip()
+            s = element[3].text.strip()
+            LP.InsertaralFinal(nombre,r,c,f,s)      
             for subelement in element:
                 if subelement.tag == "patrones":
                     for subsubelement in subelement:
-                        #print(subsubelement.tag, ' ', subsubelement.attrib, ' : ', subsubelement.text)
-                        np = subsubelement.attrib.get('codigo')
+                        np = subsubelement.attrib.get('codigo').strip()
                         pp = subsubelement.text.strip()
-                        L.InsertaralFinal(Patron(np,pp))
-            LP.InsertaralFinal(Piso(nombre,r,c,f,s,L))
-
+                        LP.cola.agregarPatron(np)
+                        for i in range(int(r)):
+                            for j in range(int(c)):
+                                LP.cola.agregarCelda(i,j,pp[j+(i*int(c))])      
         LP.mostrarLista()
 
+    
     else:
         print('== NO SE CARGÓ NINGUN ARCHIVO                     ==')
 
@@ -59,25 +56,25 @@ def menu():
         print('== 2. Procesar Archivo                            ==')
         print('== 3. Salir                                       ==')
         print('====================================================')
-        try:
-            opcion = int(input('== Elija una opción:                              ==\n>'))
-            if opcion == 1:
-                try:
-                    Ruta = ruta()
-                    if Ruta !="":
-                        print('== Ruta: ', str(Ruta))
-                        print('== EL ARCHIVO SE CARGO CON EXITO                  ==')
-                    else:
-                        print('== NO SE CARGÓ NINGUN ARCHIVO                     ==')
-                except:
-                    print('== NO SE PUDO CARGAR EL ARCHIVO                   ==')
-            elif opcion == 2:
-                AbrirArchivo(Ruta)
-            elif opcion == 3:
-                print('== ADIOS, VUELVE PRONTO                           ==')
-            else:
-                print('\n== OPCION INVALIDA                                ==')
-        except:
+        #try:
+        opcion = int(input('== Elija una opción:                              ==\n>'))
+        if opcion == 1:
+            try:
+                Ruta = ruta()
+                if Ruta !="":
+                    print('== Ruta: ', str(Ruta))
+                    print('== EL ARCHIVO SE CARGO CON EXITO                  ==')
+                else:
+                    print('== NO SE CARGÓ NINGUN ARCHIVO                     ==')
+            except:
+                print('== NO SE PUDO CARGAR EL ARCHIVO                   ==')
+        elif opcion == 2:
+            AbrirArchivo(Ruta)
+        elif opcion == 3:
+            print('== ADIOS, VUELVE PRONTO                           ==')
+        else:
             print('\n== OPCION INVALIDA                                ==')
+        #except:
+            #print('\n== OPCION INVALIDA                                ==')
 
 menu()
