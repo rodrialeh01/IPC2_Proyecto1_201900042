@@ -56,25 +56,25 @@ def menu():
         print('== 2. Procesar Archivo                            ==')
         print('== 3. Salir                                       ==')
         print('====================================================')
-        #try:
-        opcion = int(input('== Elija una opción:                              ==\n>'))
-        if opcion == 1:
-            try:
-                Ruta = ruta()
-                if Ruta !="":
-                    print('== Ruta: ', str(Ruta))
-                    print('== EL ARCHIVO SE CARGO CON EXITO                  ==')
-                else:
-                    print('== NO SE CARGÓ NINGUN ARCHIVO                     ==')
-            except:
-                print('== NO SE PUDO CARGAR EL ARCHIVO                   ==')
-        elif opcion == 2:
-            AbrirArchivo(Ruta)
-        elif opcion == 3:
-            print('== ADIOS, VUELVE PRONTO                           ==')
-        else:
+        try:
+            opcion = int(input('== Elija una opción:                              ==\n>'))
+            if opcion == 1:
+                try:
+                    Ruta = ruta()
+                    if Ruta !="":
+                        print('== Ruta: ', str(Ruta))
+                        print('== EL ARCHIVO SE CARGO CON EXITO                  ==')
+                    else:
+                        print('== NO SE CARGÓ NINGUN ARCHIVO                     ==')
+                except:
+                    print('== NO SE PUDO CARGAR EL ARCHIVO                   ==')
+            elif opcion == 2:
+                AbrirArchivo(Ruta)
+            elif opcion == 3:
+                print('== ADIOS, VUELVE PRONTO                           ==')
+            else:
+                print('\n== OPCION INVALIDA                                ==')
+        except:
             print('\n== OPCION INVALIDA                                ==')
-        #except:
-            #print('\n== OPCION INVALIDA                                ==')
 
 menu()
