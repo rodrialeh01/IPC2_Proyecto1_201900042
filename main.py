@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import filedialog
 from xml.etree import ElementTree as et
 
-from Lista_Pisos import Lista_Pisos
+from Estructuras.Lista_Pisos import Lista_Pisos
 LP = Lista_Pisos()
 
 #ABRIENDO EL ARCHIVO Y VER SU CONTENIDO

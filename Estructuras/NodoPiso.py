@@ -1,4 +1,4 @@
-from Lista_Patron import Lista_Patron
+from .Lista_Patron import Lista_Patron
 class NodoPiso():
     def __init__(self, nombre, fila, columna,costovoltear, costointercambiar):
         self.nombre = nombre

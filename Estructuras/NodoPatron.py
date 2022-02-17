@@ -1,4 +1,4 @@
-from Lista_Celdas import Lista_Celdas
+from .Lista_Celdas import Lista_Celdas
 class NodoPatron():
     def __init__(self, codigo):
         self.codigo = codigo

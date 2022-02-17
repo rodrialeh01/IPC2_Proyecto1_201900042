@@ -1,4 +1,4 @@
-from NodoCelda import NodoCelda
+from .NodoCelda import NodoCelda
 class Lista_Celdas:
     def __init__(self):
         self.cabeza = None

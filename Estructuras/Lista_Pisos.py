@@ -1,4 +1,4 @@
-from NodoPiso import NodoPiso
+from .NodoPiso import NodoPiso
 class Lista_Pisos:
     def __init__(self):
         self.cabeza = None

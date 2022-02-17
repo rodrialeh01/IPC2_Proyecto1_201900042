@@ -1,4 +1,4 @@
-from NodoPatron import NodoPatron
+from .NodoPatron import NodoPatron
 class Lista_Patron:
     def __init__(self):
         self.cabeza = None
