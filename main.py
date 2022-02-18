@@ -3,11 +3,11 @@ from tkinter import filedialog
 from xml.etree import ElementTree as et
 
 from Estructuras.Lista_Pisos import Lista_Pisos
-LP = Lista_Pisos()
+ListaPisos = Lista_Pisos()
 
 #ABRIENDO EL ARCHIVO Y VER SU CONTENIDO
 def AbrirArchivo(ruta):
-    global LP
+    global ListaPisos
     if ruta !="":
         archivo1 =  et.parse(ruta)
         root = archivo1.getroot()
@@ -20,21 +20,86 @@ def AbrirArchivo(ruta):
             c = element[1].text.strip()
             f = element[2].text.strip()
             s = element[3].text.strip()
-            LP.InsertaralFinal(nombre,r,c,f,s)      
+            ListaPisos.InsertaralFinal(nombre,r,c,f,s)      
             for subelement in element:
                 if subelement.tag == "patrones":
                     for subsubelement in subelement:
                         np = subsubelement.attrib.get('codigo').strip()
                         pp = subsubelement.text.strip()
-                        LP.cola.agregarPatron(np)
+                        ListaPisos.cola.agregarPatron(np)
                         for i in range(int(r)):
                             for j in range(int(c)):
-                                LP.cola.agregarCelda(i,j,pp[j+(i*int(c))])      
-        LP.mostrarLista()
-
-    
+                                ListaPisos.cola.agregarCelda(i,j,pp[j+(i*int(c))])      
+        #ListaPisos.mostrarLista()
+        MenuPisos()
     else:
         print('== NO SE CARGÓ NINGUN ARCHIVO                     ==')
+
+#METODO PARA MOSTRAR EL MENU DE PISOS
+def MenuPisos():
+    global ListaPisos
+    opcion = 0
+    while opcion != (len(ListaPisos)+1):
+        try:
+            ListaPisos.menuPisos()
+            print(str(len(ListaPisos)+1)+'. Salir al Menú Principal')
+            opcionp = int(input('== Elija una opción:                              ==\n>'))
+            if ListaPisos.retornarInfoPiso(opcionp) != None:
+                #print(ListaPisos.retornarPiso(opcionp))
+                MenuPatrones(opcionp)
+            elif opcionp == (len(ListaPisos)+1):
+                break
+            else:
+                print('\n== OPCION INVALIDA                                ==')
+        except:
+            print('\n== OPCION INVALIDA                                ==')
+
+def MenuPatrones(npiso):
+    global ListaPisos
+    opcionp = 0
+    patroni = None
+    patronf = None
+    while(opcionp != (len(ListaPisos.retornarPiso(npiso).listapatrones)+1)):
+        try:
+            if ListaPisos.retornarPiso(npiso) != None:
+                print('====================================================')
+                print('==        MENÚ DE OPERACIONES DE PATRONES         ==')
+                print('====================================================')
+                ListaPisos.retornarPiso(npiso).listapatrones.MenuPatrones()
+                print(str(len(ListaPisos.retornarPiso(npiso).listapatrones)+1)+'. Salir al Menú de Pisos')
+                opcionp = int(input('== Elija un patrón:                               ==\n>'))
+                patroni = ListaPisos.retornarPiso(npiso).listapatrones.retornarPatron(opcionp)
+                if opcionp > 0 and opcionp <=len(ListaPisos.retornarPiso(npiso).listapatrones) and opcionp != None:
+                    print('PATRON INICIAL:')
+                    MostrarCeldas(patroni)
+                    print('====================================================')
+                    print('==    MENÚ DE OPERACIONES DE PATRONES DESTINO     ==')
+                    print('====================================================')
+                    ListaPisos.retornarPiso(npiso).listapatrones.MenuPatrones()
+                    print(str(len(ListaPisos.retornarPiso(npiso).listapatrones)+1)+'. Salir al Menú de Pisos')
+                    opcionp2 = int(input('== Elija un patrón destino:                         ==\n>'))
+                    patronf = ListaPisos.retornarPiso(npiso).listapatrones.retornarPatron(opcionp2)
+                    if opcionp2  > 0 and opcionp <=len(ListaPisos.retornarPiso(npiso).listapatrones) and opcionp != None:
+                        print('PATRON DESTINO:')
+                        MostrarCeldas(patronf)
+                    elif opcionp == (len(ListaPisos.retornarPiso(npiso).listapatrones)+1):
+                        break
+                    else:
+                        print('\n== OPCION INVALIDA                                ==')
+                elif opcionp == (len(ListaPisos.retornarPiso(npiso).listapatrones)+1):
+                    break
+                else:
+                    print('\n== OPCION INVALIDA                                ==')
+            elif opcionp == (len(ListaPisos.retornarPiso(npiso).listapatrones)+1):
+                break
+            else:
+                print('\n== OPCION INVALIDA                                ==')
+        except:
+            print('\n== OPCION INVALIDA                                ==')
+
+def MostrarCeldas(patron):
+    patron.verCelda()
+
 
 #OBTENER LA RUTA DEL ARCHIVO
 def ruta():

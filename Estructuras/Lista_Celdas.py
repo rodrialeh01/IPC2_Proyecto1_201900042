@@ -25,9 +25,8 @@ class Lista_Celdas:
     def mostrarLista(self):
         actual = self.cabeza
         for i in range(self.tamaño):
-            print('************************************************')
-            print('Fila: ', str(actual.fila))
-            print('Columna: ', str(actual.columna))
-            print('Color: ', actual.color)
-            print('************************************************')
+            print('(' + str(actual.fila) + ',' + str(actual.columna) + ') = ' + str(actual.color))
+            #print('Fila: ', str(actual.fila))
+            #print('Columna: ', str(actual.columna))
+            #print('Color: ', actual.color)
             actual = actual.siguiente

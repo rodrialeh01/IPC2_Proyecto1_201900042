@@ -1,3 +1,4 @@
+from ast import Break, Return
 from .NodoPiso import NodoPiso
 class Lista_Pisos:
     def __init__(self):
@@ -33,6 +34,34 @@ class Lista_Pisos:
             Actual.verPatron()
             Actual = Actual.siguiente
 
+    def menuPisos(self):
+        Actual = self.cabeza
+        contador = 1
+        print('====================================================')
+        print('==                   MENÚ PISOS                   ==')
+        print('====================================================')
+        while(Actual != None):
+            print(str(contador)+'. Piso '+str(Actual.nombre))
+            Actual = Actual.siguiente
+            contador +=1
+
+    def retornarInfoPiso(self, puntero):
+        actual = self.cabeza
+        datos = ''
+        for i in range(self.tamaño):
+            if ((i+1) == puntero):
+                datos += 'Fila: '+ str(actual.fila) + '\n'+ 'Columna: '+ str(actual.columna) + '\n' + 'Costo Voltear: '+ str(actual.costovoltear) + '\n' + 'Costo Intercambiar: '+str(actual.costointercambiar)
+                return datos
+            actual = actual.siguiente
+        return None
+        
+    def retornarPiso(self, puntero):
+        actual = self.cabeza
+        for i in range(self.tamaño):
+            if((i+1) == puntero):
+                return actual
+            actual = actual.siguiente
+        return None
 
     def __len__(self):
         return self.tamaño

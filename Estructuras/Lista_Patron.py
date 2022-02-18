@@ -30,6 +30,31 @@ class Lista_Patron:
             print('--------------------------------------------------')
             actual = actual.siguiente
 
+    def MenuPatrones(self):
+        Actual = self.cabeza
+        contador = 1
+        while(Actual != None):
+            print(str(contador)+'. Patron Código ' +str(Actual.codigo))
+            Actual = Actual.siguiente
+            contador +=1
+
+    def retornarInfoPatron(self, puntero):
+        actual = self.cabeza
+        datos = ''
+        for i in range(self.tamaño):
+            if ((i+1) == puntero):
+                datos += 'Patron Codigo: '+ str(actual.codigo)
+                return datos
+            actual = actual.siguiente
+        return None
+
+    def retornarPatron(self, puntero):
+        actual = self.cabeza
+        for i in range(self.tamaño):
+            if((i+1) == puntero):
+                return actual
+            actual = actual.siguiente
+        return None
 
     def __len__(self):
         return self.tamaño
