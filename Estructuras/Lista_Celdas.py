@@ -18,15 +18,16 @@ class Lista_Celdas:
             self.cola.anterior = self.cabeza            
         else:
             self.cola.siguiente = nuevaCelda
-            nuevaCelda.anterior = self.cola
             self.cola = nuevaCelda
+            nuevaCelda.anterior = self.cola
         self.tamaño = self.tamaño +1
 
     def mostrarLista(self):
         actual = self.cabeza
         for i in range(self.tamaño):
-            print('(' + str(actual.fila) + ',' + str(actual.columna) + ') = ' + str(actual.color))
-            #print('Fila: ', str(actual.fila))
-            #print('Columna: ', str(actual.columna))
-            #print('Color: ', actual.color)
-            actual = actual.siguiente
+            if actual != None:
+                print('(' + str(actual.fila) + ',' + str(actual.columna) + ') = ' + str(actual.color))
+                #print('Fila: ', str(actual.fila))
+                #print('Columna: ', str(actual.columna))
+                #print('Color: ', actual.color)
+                actual = actual.siguiente

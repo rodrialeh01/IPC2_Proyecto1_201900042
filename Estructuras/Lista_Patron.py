@@ -31,7 +31,7 @@ class Lista_Patron:
             actual = actual.siguiente
 
     def MenuPatrones(self):
-        Actual = self.cabeza
+        Actual = self.cabeza.siguiente
         contador = 1
         while(Actual != None):
             print(str(contador)+'. Patron Código ' +str(Actual.codigo))
