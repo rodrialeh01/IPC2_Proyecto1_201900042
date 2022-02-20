@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<pisosArtesanales>
+    <piso nombre="Piso 1">
+        <R>5</R>
+        <C>2</C>
+        <F>1</F>
+        <S>1</S>
+        <patrones>
+            <patron codigo="RANDOM1">
+                WBBWBWBWBW
+            </patron>
+            <patron codigo="RANDOM2">
+                WBBWBWBWBW
+            </patron>
+        </patrones>
+    </piso>
+    <piso nombre="Piso 2">
+        <R>4</R>
+        <C>1</C>
+        <F>1</F>
+        <S>1</S>
+        <patrones>
+            <patron codigo="2RANDOM1">
+                BBWW
+            </patron>
+            <patron codigo="2RANDOM2">
+                WBWB
+            </patron>
+        </patrones>
+    </piso>
+    <piso nombre="Piso 3">
+        <R>4</R>
+        <C>4</C>
+        <F>1000</F>
+        <S>1</S>
+        <patrones>
+            <patron codigo="3RANDOM1">
+                WWWBWBWWWWWBBWBW
+            </patron>
+            <patron codigo="3RANDOM2">
+                WWBWWBWBBWWWBWWW
+            </patron>
+            <patron codigo="3RANDOM3">
+                WWWWWBWBBWBWWBWW
+            </patron>
+        </patrones>
+    </piso>
+    <piso nombre="Piso 4">
+        <R>2</R>
+        <C>4</C>
+        <F>2000</F>
+        <S>80</S>
+        <patrones>
+            <patron codigo="4RANDOM1">
+                BWBWBWBW
+            </patron>
+            <patron codigo="4RANDOM2">
+                WBWBBWBW
+            </patron>
+        </patrones>
+    </piso>
+</pisosArtesanales>

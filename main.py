@@ -24,7 +24,7 @@ def AbrirArchivo(ruta):
                     if subelement.tag == "patrones":
                         for subsubelement in subelement:
                             np = subsubelement.attrib.get('codigo').strip()
-                            pp = subsubelement.text.strip()
+                            pp = subsubelement.text.strip().upper()
                             ListaPisos.cola.agregarPatron(np)
                             for i in range(int(r)):
                                 for j in range(int(c)):
