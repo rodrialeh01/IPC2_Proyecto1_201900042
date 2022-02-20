@@ -35,7 +35,7 @@ class Lista_Patron:
         Actual = self.cabeza.siguiente
         contador = 1
         while(Actual != None):
-            print(str(contador)+'. Patron Código ' +str(Actual.codigo))
+            print(str(contador)+'. Realizar las operaciones al Patron Código ' +str(Actual.codigo))
             Actual = Actual.siguiente
             contador +=1
 

@@ -70,13 +70,16 @@ def MenuPatrones(npiso):
                 print('==        MENÚ DE OPERACIONES DE PATRONES         ==')
                 print('====================================================')
                 ListaPisos.retornarPiso(npiso).listapatrones.MenuPatrones()
-                print(str(len(ListaPisos.retornarPiso(npiso).listapatrones))+'. Salir al Menú de Pisos')
+                print(str(len(ListaPisos.retornarPiso(npiso).listapatrones))+'. Graficar el patrón inicial')
+                print(str(len(ListaPisos.retornarPiso(npiso).listapatrones)+1)+'. Salir al Menú de Pisos')
                 opcionp2 = int(input('== Elija un patrón:                               ==\n>'))
                 if ListaPisos.retornarPiso(npiso).listapatrones.retornarPatron(opcionp2+1) != None:
                     patronf = ListaPisos.retornarPiso(npiso).listapatrones.retornarPatron(opcionp2+1)
                     MostrarCeldas(patronf)
                     MenuOperaciones(npiso)
                 elif opcionp2 == len(ListaPisos.retornarPiso(npiso).listapatrones):
+                    ListaPisos.retornarPiso(npiso).listapatrones.graficarprimero()
+                elif opcionp2 ==(len(ListaPisos.retornarPiso(npiso).listapatrones)+1):
                     break
                 else:
                     print('\n== OPCION INVALIDA                                ==')
