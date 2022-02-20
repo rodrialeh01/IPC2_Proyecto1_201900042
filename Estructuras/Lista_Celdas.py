@@ -18,9 +18,15 @@ class Lista_Celdas:
             self.cola.anterior = self.cabeza            
         else:
             self.cola.siguiente = nuevaCelda
-            self.cola = nuevaCelda
-            nuevaCelda.anterior = self.cola
+            nuevaCelda.anterior = self.cola            
+            self.cola = nuevaCelda            
         self.tamaño = self.tamaño +1
+
+    def tamañofilas(self):
+        return int(self.cola.fila)
+    
+    def tamañocolumnas(self):
+        return int(self.cola.columna)
 
     def mostrarLista(self):
         actual = self.cabeza

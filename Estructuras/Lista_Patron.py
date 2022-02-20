@@ -1,4 +1,5 @@
 from .NodoPatron import NodoPatron
+import os
 class Lista_Patron:
     def __init__(self):
         self.cabeza = None
@@ -55,6 +56,36 @@ class Lista_Patron:
                 return actual
             actual = actual.siguiente
         return None
+
+    def graficarprimero(self):
+        texto = ''
+        file = open('PatronesGraficados/Patron_'+str(self.cabeza.codigo)+'.dot','w')
+        texto += '''digraph structs {
+	node [shape=plaintext]
+	patron [label=<
+<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="20">\n'''
+        contx = 0
+        actual1 = self.cabeza.listaceldas.cabeza
+        while(contx <=self.cabeza.listaceldas.tamañofilas()):
+            texto += '''<TR>\n'''
+            conty = 0
+            while(conty <=self.cabeza.listaceldas.tamañocolumnas()):
+                if actual1.color == 'W':
+                    texto += '''<TD></TD>\n'''
+                elif actual1.color == 'B':
+                    texto += '''<TD bgcolor="black"></TD>\n'''
+                conty += 1
+                actual1 = actual1.siguiente
+            texto += '''</TR>'''
+            contx +=1
+        texto += '''</TABLE>>]
+}'''
+        file.write(texto)
+        file.close()
+        os.system('dot -Tpng PatronesGraficados/Patron_'+str(self.cabeza.codigo)+'.dot -o PatronesGraficados/Patron_'+str(self.cabeza.codigo)+'.png')
+        rutaa = 'PatronesGraficados\Patron_'+str(self.cabeza.codigo)+'.png'
+        os.startfile(rutaa)
+        print('Grafica del patron inicial generada con exito')
 
     def __len__(self):
         return self.tamaño
