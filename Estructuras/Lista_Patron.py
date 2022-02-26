@@ -1,4 +1,5 @@
 from .NodoPatron import NodoPatron
+from .Lista_Celdas import Lista_Celdas
 import os
 class Lista_Patron:
     def __init__(self):
@@ -86,6 +87,62 @@ class Lista_Patron:
         rutaa = 'PatronesGraficados\Patron_'+str(self.cabeza.codigo)+'.png'
         os.startfile(rutaa)
         print('Grafica del patron inicial generada con exito')
+
+    def graficarpatronfinal(self,puntero):
+        texto = ''
+        file = open('PatronesGraficados/Patron_'+str(self.retornarPatron(puntero).codigo)+'.dot','w')
+        texto += '''digraph structs {
+	node [shape=plaintext]
+	patron [label=<
+<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="20">\n'''
+        contx = 0
+        actual1 = self.retornarPatron(puntero).listaceldas.cabeza
+        while(contx <=self.retornarPatron(puntero).listaceldas.tamañofilas()):
+            texto += '''<TR>\n'''
+            conty = 0
+            while(conty <=self.retornarPatron(puntero).listaceldas.tamañocolumnas()):
+                if actual1.color == 'W':
+                    texto += '''<TD></TD>\n'''
+                elif actual1.color == 'B':
+                    texto += '''<TD bgcolor="black"></TD>\n'''
+                conty += 1
+                actual1 = actual1.siguiente
+            texto += '''</TR>'''
+            contx +=1
+        texto += '''</TABLE>>]
+}'''
+        file.write(texto)
+        file.close()
+        os.system('dot -Tpng PatronesGraficados/Patron_'+str(self.retornarPatron(puntero).codigo)+'.dot -o PatronesGraficados/Patron_'+str(self.cabeza.codigo)+'.png')
+        rutaa = 'PatronesGraficados\Patron_'+str(self.retornarPatron(puntero).codigo)+'.png'
+        os.startfile(rutaa)
+        print('Grafica del patron inicial generada con exito')
+
+    def operarPatron(self, puntero):
+        destino = self.retornarPatron(puntero).listaceldas
+        listaaux = Lista_Celdas()
+        nactual = self.cabeza.listaceldas.cabeza 
+        #asignando los valores de la lista de celdas inicial a la lista auxiliar
+        while nactual != None:
+            listaaux.InsertaralFinal(nactual.fila,nactual.columna,nactual.color)
+            nactual = nactual.siguiente
+        
+        auxactual = destino.cabeza
+        aux2actual = listaaux.cabeza
+        #while auxactual != None:
+        if str(aux2actual.color) != str(auxactual.color):
+            if str(aux2actual.siguiente.color) == str(auxactual.color):
+                aux = listaaux.cabeza
+                listaaux.cabeza = listaaux.cabeza.siguiente
+                aux.anterior = listaaux.cabeza
+                aux.siguiente = listaaux.cabeza.siguiente
+                listaaux.cabeza.siguiente = aux
+                listaaux.cabeza.anterior = None
+
+        
+        
+        listaaux.mostrarLista()
+
 
     def __len__(self):
         return self.tamaño

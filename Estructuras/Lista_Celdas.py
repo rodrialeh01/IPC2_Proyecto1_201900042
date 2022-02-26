@@ -28,6 +28,14 @@ class Lista_Celdas:
     def tamañocolumnas(self):
         return int(self.cola.columna)
 
+    def retornarcelda(self, puntero):
+        actual = self.cabeza
+        for i in range(self.tamaño):
+            if((i+1) == puntero):
+                return actual
+            actual = actual.siguiente
+        return None
+
     def mostrarLista(self):
         actual = self.cabeza
         for i in range(self.tamaño):
@@ -37,3 +45,6 @@ class Lista_Celdas:
                 #print('Columna: ', str(actual.columna))
                 #print('Color: ', actual.color)
                 actual = actual.siguiente
+
+    def __len__(self):
+        return int(self.tamaño)

@@ -72,11 +72,11 @@ def MenuPatrones(npiso):
                 ListaPisos.retornarPiso(npiso).listapatrones.MenuPatrones()
                 print(str(len(ListaPisos.retornarPiso(npiso).listapatrones))+'. Graficar el patrón inicial')
                 print(str(len(ListaPisos.retornarPiso(npiso).listapatrones)+1)+'. Salir al Menú de Pisos')
-                opcionp2 = int(input('== Elija un patrón:                               ==\n>'))
+                opcionp2 = int(input('== Elige tu patrón destino o una opcion:          ==\n>'))
                 if ListaPisos.retornarPiso(npiso).listapatrones.retornarPatron(opcionp2+1) != None:
                     patronf = ListaPisos.retornarPiso(npiso).listapatrones.retornarPatron(opcionp2+1)
                     MostrarCeldas(patronf)
-                    MenuOperaciones(npiso)
+                    MenuOperaciones(npiso,opcionp2+1)
                 elif opcionp2 == len(ListaPisos.retornarPiso(npiso).listapatrones):
                     ListaPisos.retornarPiso(npiso).listapatrones.graficarprimero()
                 elif opcionp2 ==(len(ListaPisos.retornarPiso(npiso).listapatrones)+1):
@@ -95,20 +95,20 @@ def MostrarCeldas(patron):
     patron.verCelda()
 
 #MENU DE OPERACIONES
-def MenuOperaciones(npiso):
+def MenuOperaciones(npiso,of):
     global ListaPisos
     opcion = 0
     while opcion != 3:
         print('====================================================')
         print('== 1. Mostrar graficamente el patron inicial      ==')
-        print('== 2. Cambiar el patron inicial al patron escogido==')
+        print('== 2. Cambiar el patron inicial al patron destino ==')
         print('== 3. Salir                                       ==')
         print('====================================================')
         opcion = int(input('== Elija una opción:                              ==\n>'))
         if opcion == 1:
             ListaPisos.retornarPiso(npiso).listapatrones.graficarprimero()
         elif opcion == 2:
-            pass
+            ListaPisos.retornarPiso(npiso).listapatrones.operarPatron(of)
         elif opcion == 3:
             break
         else:
