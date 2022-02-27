@@ -75,7 +75,7 @@ def MenuPatrones(npiso):
                 opcionp2 = int(input('== Elige tu patrón destino o una opcion:          ==\n>'))
                 if ListaPisos.retornarPiso(npiso).listapatrones.retornarPatron(opcionp2+1) != None:
                     patronf = ListaPisos.retornarPiso(npiso).listapatrones.retornarPatron(opcionp2+1)
-                    MostrarCeldas(patronf)
+                    #MostrarCeldas(patronf)
                     MenuOperaciones(npiso,opcionp2+1)
                 elif opcionp2 == len(ListaPisos.retornarPiso(npiso).listapatrones):
                     ListaPisos.retornarPiso(npiso).listapatrones.graficarprimero()
@@ -108,7 +108,9 @@ def MenuOperaciones(npiso,of):
         if opcion == 1:
             ListaPisos.retornarPiso(npiso).listapatrones.graficarprimero()
         elif opcion == 2:
-            ListaPisos.retornarPiso(npiso).listapatrones.operarPatron(of)
+            Ci = int(ListaPisos.retornarPiso(npiso).costointercambiar)
+            Cv= int(ListaPisos.retornarPiso(npiso).costovoltear)
+            ListaPisos.retornarPiso(npiso).listapatrones.operarPatron(of,Ci,Cv)
         elif opcion == 3:
             break
         else:

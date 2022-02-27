@@ -88,19 +88,20 @@ class Lista_Patron:
         os.startfile(rutaa)
         print('Grafica del patron inicial generada con exito')
 
-    def graficarpatronfinal(self,puntero):
+    #GRAFICAR EL PATRON RESULTADO
+    def graficarpatronfinal(self,lista):
         texto = ''
-        file = open('PatronesGraficados/Patron_'+str(self.retornarPatron(puntero).codigo)+'.dot','w')
+        file = open('PatronesGraficados/PatronResultado_'+str(self.cabeza.codigo)+'.dot','w')
         texto += '''digraph structs {
 	node [shape=plaintext]
 	patron [label=<
 <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="20">\n'''
         contx = 0
-        actual1 = self.retornarPatron(puntero).listaceldas.cabeza
-        while(contx <=self.retornarPatron(puntero).listaceldas.tamañofilas()):
+        actual1 = lista.cabeza
+        while(contx <=self.cabeza.listaceldas.tamañofilas()):
             texto += '''<TR>\n'''
             conty = 0
-            while(conty <=self.retornarPatron(puntero).listaceldas.tamañocolumnas()):
+            while(conty <=self.cabeza.listaceldas.tamañocolumnas()):
                 if actual1.color == 'W':
                     texto += '''<TD></TD>\n'''
                 elif actual1.color == 'B':
@@ -113,12 +114,12 @@ class Lista_Patron:
 }'''
         file.write(texto)
         file.close()
-        os.system('dot -Tpng PatronesGraficados/Patron_'+str(self.retornarPatron(puntero).codigo)+'.dot -o PatronesGraficados/Patron_'+str(self.cabeza.codigo)+'.png')
-        rutaa = 'PatronesGraficados\Patron_'+str(self.retornarPatron(puntero).codigo)+'.png'
+        os.system('dot -Tpng PatronesGraficados/PatronResultado_'+str(self.cabeza.codigo)+'.dot -o PatronesGraficados/PatronResultado_'+str(self.cabeza.codigo)+'.png')
+        rutaa = 'PatronesGraficados\PatronResultado_'+str(self.cabeza.codigo)+'.png'
         os.startfile(rutaa)
-        print('Grafica del patron inicial generada con exito')
+        print('Se genero el resultado de las operaciones de los patrones')
 
-    def operarPatron(self, puntero):
+    def operarPatron(self, puntero,costoi, costov):
         destino = self.retornarPatron(puntero).listaceldas
         listaaux = Lista_Celdas()
         nactual = self.cabeza.listaceldas.cabeza 
@@ -126,23 +127,47 @@ class Lista_Patron:
         while nactual != None:
             listaaux.InsertaralFinal(nactual.fila,nactual.columna,nactual.color)
             nactual = nactual.siguiente
-        
+        CostoT = 0
         auxactual = destino.cabeza
         aux2actual = listaaux.cabeza
-        #while auxactual != None:
         if str(aux2actual.color) != str(auxactual.color):
             if str(aux2actual.siguiente.color) == str(auxactual.color):
                 aux = listaaux.cabeza
                 listaaux.cabeza = listaaux.cabeza.siguiente
                 aux.anterior = listaaux.cabeza
                 aux.siguiente = listaaux.cabeza.siguiente
+                listaaux.cabeza.siguiente.anterior = aux
                 listaaux.cabeza.siguiente = aux
                 listaaux.cabeza.anterior = None
-
-        
+                CostoT += costoi
+            else:
+                listaaux.cabeza.color = aux2actual.color
+                CostoT += costov
+            actual = listaaux.cabeza
+            actual = actual.siguiente
+        auxactual = auxactual.siguiente
+        while actual != None and auxactual != None:
+            if str(actual.color) != str(auxactual.color):
+                if actual.siguiente != None or auxactual.siguiente != None:
+                    if str(actual.siguiente.color) == str(auxactual.color):
+                        aux = actual
+                        actual = actual.siguiente
+                        actual.anterior = aux.anterior
+                        aux.anterior.siguiente = actual                        
+                        aux.anterior = actual
+                        aux.siguiente = actual.siguiente
+                        actual.siguiente.anterior = aux
+                        actual.siguiente = aux
+                        CostoT += costoi
+                else:
+                    actual.color = str(auxactual.color)
+                    CostoT += costov
+            auxactual = auxactual.siguiente
+            actual= actual.siguiente
         
         listaaux.mostrarLista()
-
+        self.graficarpatronfinal(listaaux)
+        print('Costo de produccion: ' + str(CostoT))
 
     def __len__(self):
         return self.tamaño

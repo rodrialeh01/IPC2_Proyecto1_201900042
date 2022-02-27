@@ -3,15 +3,9 @@ digraph structs {
 	patron [label=<
 <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="20">
 <TR>
-<TD></TD>
 <TD bgcolor="black"></TD>
 <TD bgcolor="black"></TD>
-</TR><TR>
 <TD bgcolor="black"></TD>
-<TD></TD>
-<TD bgcolor="black"></TD>
-</TR><TR>
-<TD></TD>
 <TD></TD>
 <TD></TD>
 </TR></TABLE>>]
