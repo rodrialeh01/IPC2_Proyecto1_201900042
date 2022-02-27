@@ -129,7 +129,7 @@ class Lista_Patron:
             nactual = nactual.siguiente
         CostoT = 0
         auxactual = destino.cabeza
-        aux2actual = listaaux.cabeza
+        aux2actual = listaaux.cabeza        
         if str(aux2actual.color) != str(auxactual.color):
             if str(aux2actual.siguiente.color) == str(auxactual.color):
                 aux = listaaux.cabeza
@@ -141,11 +141,12 @@ class Lista_Patron:
                 listaaux.cabeza.anterior = None
                 CostoT += costoi
             else:
-                listaaux.cabeza.color = aux2actual.color
+                listaaux.cabeza.color = auxactual.color
                 CostoT += costov
-            actual = listaaux.cabeza
-            actual = actual.siguiente
         auxactual = auxactual.siguiente
+        actual = listaaux.cabeza
+        actual = actual.siguiente  
+        contador = 2      
         while actual != None and auxactual != None:
             if str(actual.color) != str(auxactual.color):
                 if actual.siguiente != None or auxactual.siguiente != None:
@@ -156,14 +157,19 @@ class Lista_Patron:
                         aux.anterior.siguiente = actual                        
                         aux.anterior = actual
                         aux.siguiente = actual.siguiente
-                        actual.siguiente.anterior = aux
-                        actual.siguiente = aux
+                        if actual.siguiente != None:
+                            actual.siguiente.anterior = aux   
+                        actual.siguiente = aux                                             
                         CostoT += costoi
+                    else:
+                        actual.color = str(auxactual.color)
+                        CostoT += costov
                 else:
                     actual.color = str(auxactual.color)
                     CostoT += costov
             auxactual = auxactual.siguiente
             actual= actual.siguiente
+            contador += 1
         
         listaaux.mostrarLista()
         self.graficarpatronfinal(listaaux)
