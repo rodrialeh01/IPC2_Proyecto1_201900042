@@ -8,8 +8,8 @@ class Lista_Celdas:
     def Vacio(self):
         return self.cabeza == self.cola == None
 
-    def InsertaralFinal(self,fila,columna, color):
-        nuevaCelda = NodoCelda(fila,columna,color)
+    def InsertaralFinal(self,id,fila,columna, color):
+        nuevaCelda = NodoCelda(id,fila,columna,color)
         if self.Vacio():
             self.cabeza = self.cola = nuevaCelda
         elif self.cabeza == self.cola:
@@ -40,7 +40,7 @@ class Lista_Celdas:
         actual = self.cabeza
         for i in range(self.tamaño):
             if actual != None:
-                print(str(actual.color))
+                print('ID: ' + str(actual.id) + ' = ' +str(actual.color))
                 #print('Fila: ', str(actual.fila))
                 #print('Columna: ', str(actual.columna))
                 #print('Color: ', actual.color)

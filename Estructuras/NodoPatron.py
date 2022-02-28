@@ -5,8 +5,8 @@ class NodoPatron():
         self.listaceldas = Lista_Celdas()
         self.siguiente = None
 
-    def agregarCeldas(self,fila,columna,color):
-        self.listaceldas.InsertaralFinal(fila,columna,color)
+    def agregarCeldas(self,id,fila,columna,color):
+        self.listaceldas.InsertaralFinal(id,fila,columna,color)
 
     def verCelda(self):
         self.listaceldas.mostrarLista()

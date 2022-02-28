@@ -134,7 +134,7 @@ class Lista_Patron:
         nactual = self.cabeza.listaceldas.cabeza 
         #asignando los valores de la lista de celdas inicial a la lista auxiliar
         while nactual != None:
-            listaaux.InsertaralFinal(nactual.fila,nactual.columna,nactual.color)
+            listaaux.InsertaralFinal(nactual.id,nactual.fila,nactual.columna,nactual.color)
             nactual = nactual.siguiente
         contador = 1
         CostoT = 0
@@ -150,18 +150,18 @@ class Lista_Patron:
                 listaaux.cabeza.siguiente = aux
                 listaaux.cabeza.anterior = None
                 CostoT += costoi
-                contenido += str(contador) + '. Se intercambió la celda de la fila ' + str(aux.fila) + ' y columna ' + str(aux.columna) + ' a la fila ' + str(listaaux.cabeza.fila) + ' y columna ' + str(listaaux.cabeza.columna) + '. Costo: Q'+ str(float(costoi)) + '\n'
-                contenidoh += '<h3>' + str(contador) + '. Se intercambió la celda de la fila ' + str(aux.fila) + ' y columna ' + str(aux.columna) + ' a la fila ' + str(listaaux.cabeza.fila) + ' y columna ' + str(listaaux.cabeza.columna) + '. Costo: Q'+ str(float(costoi)) + '</h3>\n'
+                contenido += str(contador) + '. Se intercambiaron de posicion la celda ID ' +str(aux.id)+ ' con la celda ID ' + str(listaaux.cabeza.id) +'. Costo: Q'+ str(float(costoi)) + '\n'
+                contenidoh += '<h3>' + str(contador) + '. Se intercambiaron de posicion la celda ID ' +str(aux.id)+ ' con la celda ID ' + str(listaaux.cabeza.id) +'. Costo: Q'+ str(float(costoi)) + '</h3>\n'
                 contador += 1
             else:
                 listaaux.cabeza.color = auxactual.color
                 CostoT += costov
                 if str(listaaux.cabeza.color) == 'W':
-                    contenido += str(contador) + '. Se volteó la celda de la fila ' + str(listaaux.cabeza.fila) + ' y columna ' + str(listaaux.cabeza.columna) + ' de color blanco al color negro' + '. Costo: Q'+ str(float(costov)) + '\n'
-                    contenidoh += '<h3>' + str(contador) + '. Se volteó la celda de la fila ' + str(listaaux.cabeza.fila) + ' y columna ' + str(listaaux.cabeza.columna) + ' de color blanco al color negro' + '. Costo: Q'+ str(float(costov)) + '</h3>\n'
+                    contenido += str(contador) + '. Se volteó la celda ID ' +str(listaaux.cabeza.id)+ ' de color negro al color blanco' + '. Costo: Q'+ str(float(costov)) + '\n'
+                    contenidoh += '<h3>' + str(contador) + '. Se volteó la celda ID ' +str(listaaux.cabeza.id)+ ' de color negro al color blanco' + '. Costo: Q'+ str(float(costov)) + '</h3>\n'
                 elif str(listaaux.cabeza.color) ==  'B':
-                    contenido += str(contador) + '. Se volteó la celda de la fila ' + str(listaaux.cabeza.fila) + ' y columna ' + str(listaaux.cabeza.columna) + ' de color negro al color blanco' + '. Costo: Q'+ str(float(costov)) + '\n'
-                    contenidoh += '<h3>' + str(contador) + '. Se volteó la celda de la fila ' + str(listaaux.cabeza.fila) + ' y columna ' + str(listaaux.cabeza.columna) + ' de color negro al color blanco' + '. Costo: Q'+ str(float(costov)) + '</h3>\n'
+                    contenido += str(contador) + '. Se volteó la celda ID ' +str(listaaux.cabeza.id)+ ' de color blanco al color negro' + '. Costo: Q'+ str(float(costov)) + '\n'
+                    contenidoh += '<h3>' + str(contador) + '. Se volteó la celda ID ' +str(listaaux.cabeza.id)+ ' de color blanco al color negro' + '. Costo: Q'+ str(float(costov)) + '</h3>\n'
                 contador += 1
         auxactual = auxactual.siguiente
         actual = listaaux.cabeza
@@ -180,27 +180,27 @@ class Lista_Patron:
                             actual.siguiente.anterior = aux   
                         actual.siguiente = aux                                             
                         CostoT += costoi
-                        contenido += str(contador) + '. Se intercambió la celda de la fila ' + str(aux.fila) + ' y columna ' + str(aux.columna) + ' a la fila ' + str(actual.fila) + ' y columna ' + str(actual.columna) + '. Costo: Q'+ str(float(costoi)) + '\n'
-                        contenidoh += '<h3>' + str(contador) + '. Se intercambió la celda de la fila ' + str(aux.fila) + ' y columna ' + str(aux.columna) + ' a la fila ' + str(actual.fila) + ' y columna ' + str(actual.columna) + '. Costo: Q'+ str(float(costoi)) + '</h3>\n'
+                        contenido += str(contador) + '. Se intercambiaron de posicion la celda ID ' +str(aux.id)+ ' con la celda ID ' + str(actual.id) +'. Costo: Q'+ str(float(costoi)) + '\n'
+                        contenidoh += '<h3>' + str(contador) + '. Se intercambiaron de posicion la celda ID ' +str(aux.id)+ ' con la celda ID ' + str(listaaux.cabeza.id) + '. Costo: Q'+ str(float(costoi)) + '</h3>\n'
                     else:
                         actual.color = str(auxactual.color)
                         CostoT += costov
                         if str(actual.color) == 'W':
-                            contenido += str(contador) + '. Se volteó la celda de la fila ' + str(actual.fila) + ' y columna ' + str(actual.columna) + ' de color blanco al color negro' + '. Costo: Q'+ str(float(costov)) + '\n'
-                            contenidoh += '<h3>' + str(contador) + '. Se volteó la celda de la fila ' + str(actual.fila) + ' y columna ' + str(actual.columna) + ' de color blanco al color negro' + '. Costo: Q'+ str(float(costov)) + '</h3>\n'
+                            contenido += str(contador) + '. Se volteó la celda ID ' +str(actual.id)+ ' de color negro al color blanco' + '. Costo: Q'+ str(float(costov)) + '\n'
+                            contenidoh += '<h3>' + str(contador) + '. Se volteó la celda ID ' +str(actual.id)+ ' de color negro al color blanco' + '. Costo: Q'+ str(float(costov)) + '</h3>\n'
                         elif str(actual.color) ==  'B':
-                            contenido += str(contador) + '. Se volteó la celda de la fila ' + str(actual.fila) + ' y columna ' + str(actual.columna) + ' de color negro al color blanco' + '. Costo: Q'+ str(float(costov)) + '\n'
-                            contenidoh += '<h3>' + str(contador) + '. Se volteó la celda de la fila ' + str(actual.fila) + ' y columna ' + str(actual.columna) + ' de color negro al color blanco' + '. Costo: Q'+ str(float(costov)) + '</h3>\n'
+                            contenido += str(contador) + '. Se volteó la celda ID ' +str(actual.id)+ ' de color blanco al color negro' + '. Costo: Q'+ str(float(costov)) + '\n'
+                            contenidoh += '<h3>' + str(contador) + '. Se volteó la celda ID ' +str(actual.id)+ ' de color blanco al color negro' + '. Costo: Q'+ str(float(costov)) + '</h3>\n'
                     contador += 1
                 else:
                     actual.color = str(auxactual.color)
                     CostoT += costov
                     if str(actual.color) == 'W':
-                        contenido += str(contador) + '. Se volteó la celda de la fila ' + str(actual.fila) + ' y columna ' + str(actual.columna) + ' de color blanco al color negro' + '. Costo: Q'+ str(float(costov)) + '\n'
-                        contenidoh += '<h3>' + str(contador) + '. Se volteó la celda de la fila ' + str(actual.fila) + ' y columna ' + str(actual.columna) + ' de color blanco al color negro' + '. Costo: Q'+ str(float(costov)) + '</h3>\n'
+                        contenido += str(contador) + '. Se volteó la celda ID ' +str(actual.id)+ ' de color negro al color blanco' + '. Costo: Q'+ str(float(costov)) + '\n'
+                        contenidoh += '<h3>' + str(contador) + '. Se volteó la celda ID ' +str(actual.id)+ ' de color negro al color blanco' + '. Costo: Q'+ str(float(costov)) + '</h3>\n'
                     elif str(actual.color) ==  'B':
-                        contenido += str(contador) + '. Se volteó la celda de la fila ' + str(actual.fila) + ' y columna ' + str(actual.columna) + ' de color negro al color blanco' + '. Costo: Q'+ str(float(costov)) + '\n'
-                        contenidoh += '<h3>' + str(contador) + '. Se volteó la celda de la fila ' + str(actual.fila) + ' y columna ' + str(actual.columna) + ' de color negro al color blanco' + '. Costo: Q'+ str(float(costov)) + '</h3>\n'
+                        contenido += str(contador) + '. Se volteó la celda ID ' +str(actual.id)+ ' de color blanco al color negro' + '. Costo: Q'+ str(float(costov)) + '\n'
+                        contenidoh += '<h3>' + str(contador) + '. Se volteó la celda ID ' +str(actual.id)+ ' de color blanco al color negro' + '. Costo: Q'+ str(float(costov)) + '</h3>\n'
                     contador += 1
             auxactual = auxactual.siguiente
             actual= actual.siguiente

@@ -28,10 +28,12 @@ def AbrirArchivo(ruta):
                             np = subsubelement.attrib.get('codigo').strip()
                             pp = subsubelement.text.strip().upper()
                             ListaPisos.cola.agregarPatron(np)
+                            cont = 1
                             for i in range(int(r)):
                                 for j in range(int(c)):
-                                    ListaPisos.cola.agregarCelda(i,j,pp[j+(i*int(c))].strip())      
-            MenuPisos()
+                                    ListaPisos.cola.agregarCelda(cont,i,j,pp[j+(i*int(c))].strip())     
+                                    cont +=1
+            menuAnalizar()
         except:
             print('== ERROR EN EL ARCHIVO                            ==')
     else:
@@ -118,7 +120,7 @@ def MenuOperaciones(npiso,of):
         else:
             print('\n== OPCION INVALIDA                                ==')
 
-#GENERAR REPORTES
+#MENU PARA GENERAR REPORTES DE INSTRUCCIONES
 def Reporte(Piso, of,Ci,Cv):
     opcion = 0
     while int(opcion) != 1 or int(opcion) !=2 or int(opcion) !=3:
@@ -153,6 +155,23 @@ def Reporte(Piso, of,Ci,Cv):
         else:
             print('\n== OPCION INVALIDA                                ==')
 
+def menuAnalizar():
+    opcion = 0
+    while int(opcion) != 1 or int(opcion) !=2 or int(opcion) !=3:
+        print('====================================================')
+        print('== 1. Mostrar los datos del archivo en orden      ==')
+        print('== 2. Ir al Menú de pisos                         ==')
+        print('== 3. Salir al menú principal                     ==')
+        print('====================================================')
+        opcion = int(input('== Elija una opción:                              ==\n>'))
+        if opcion == 1:
+            pass
+        elif opcion == 2:
+            MenuPisos()
+        elif opcion == 3:
+            break
+        else:
+            print('\n== OPCION INVALIDA                                ==')
 
 #OBTENER LA RUTA DEL ARCHIVO
 def ruta():

@@ -12,8 +12,8 @@ class NodoPiso():
     def agregarPatron(self,codigo):
         self.listapatrones.InsertaralFinal(codigo)
 
-    def agregarCelda(self,fila,columna,color):
-        self.listapatrones.cola.listaceldas.InsertaralFinal(fila,columna,color)
+    def agregarCelda(self,id,fila,columna,color):
+        self.listapatrones.cola.listaceldas.InsertaralFinal(id,fila,columna,color)
 
     def verPatron(self):
         self.listapatrones.mostrarLista()
