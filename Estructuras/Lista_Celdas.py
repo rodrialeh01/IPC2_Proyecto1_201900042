@@ -40,7 +40,7 @@ class Lista_Celdas:
         actual = self.cabeza
         for i in range(self.tamaño):
             if actual != None:
-                print('(' + str(actual.fila) + ',' + str(actual.columna) + ') = ' + str(actual.color))
+                print(str(actual.color))
                 #print('Fila: ', str(actual.fila))
                 #print('Columna: ', str(actual.columna))
                 #print('Color: ', actual.color)

@@ -1,6 +1,10 @@
 from .NodoPatron import NodoPatron
 from .Lista_Celdas import Lista_Celdas
 import os
+
+contenido = ''
+contenidoh = ''
+CostoT = 0
 class Lista_Patron:
     def __init__(self):
         self.cabeza = None
@@ -58,6 +62,7 @@ class Lista_Patron:
             actual = actual.siguiente
         return None
 
+    #GRAFICA EL PRIMER PATRON
     def graficarprimero(self):
         texto = ''
         file = open('PatronesGraficados/Patron_'+str(self.cabeza.codigo)+'.dot','w')
@@ -117,9 +122,13 @@ class Lista_Patron:
         os.system('dot -Tpng PatronesGraficados/PatronResultado_'+str(self.cabeza.codigo)+'.dot -o PatronesGraficados/PatronResultado_'+str(self.cabeza.codigo)+'.png')
         rutaa = 'PatronesGraficados\PatronResultado_'+str(self.cabeza.codigo)+'.png'
         os.startfile(rutaa)
-        print('Se genero el resultado de las operaciones de los patrones')
+        print('Se genero el resultado gráfico del patron')
 
     def operarPatron(self, puntero,costoi, costov):
+        global CostoT
+        global contenido
+        global contenidoh
+        contenido = ''
         destino = self.retornarPatron(puntero).listaceldas
         listaaux = Lista_Celdas()
         nactual = self.cabeza.listaceldas.cabeza 
@@ -127,6 +136,7 @@ class Lista_Patron:
         while nactual != None:
             listaaux.InsertaralFinal(nactual.fila,nactual.columna,nactual.color)
             nactual = nactual.siguiente
+        contador = 1
         CostoT = 0
         auxactual = destino.cabeza
         aux2actual = listaaux.cabeza        
@@ -140,13 +150,22 @@ class Lista_Patron:
                 listaaux.cabeza.siguiente = aux
                 listaaux.cabeza.anterior = None
                 CostoT += costoi
+                contenido += str(contador) + '. Se intercambió la celda de la fila ' + str(aux.fila) + ' y columna ' + str(aux.columna) + ' a la fila ' + str(listaaux.cabeza.fila) + ' y columna ' + str(listaaux.cabeza.columna) + '. Costo: Q'+ str(float(costoi)) + '\n'
+                contenidoh += '<h3>' + str(contador) + '. Se intercambió la celda de la fila ' + str(aux.fila) + ' y columna ' + str(aux.columna) + ' a la fila ' + str(listaaux.cabeza.fila) + ' y columna ' + str(listaaux.cabeza.columna) + '. Costo: Q'+ str(float(costoi)) + '</h3>\n'
+                contador += 1
             else:
                 listaaux.cabeza.color = auxactual.color
                 CostoT += costov
+                if str(listaaux.cabeza.color) == 'W':
+                    contenido += str(contador) + '. Se volteó la celda de la fila ' + str(listaaux.cabeza.fila) + ' y columna ' + str(listaaux.cabeza.columna) + ' de color blanco al color negro' + '. Costo: Q'+ str(float(costov)) + '\n'
+                    contenidoh += '<h3>' + str(contador) + '. Se volteó la celda de la fila ' + str(listaaux.cabeza.fila) + ' y columna ' + str(listaaux.cabeza.columna) + ' de color blanco al color negro' + '. Costo: Q'+ str(float(costov)) + '</h3>\n'
+                elif str(listaaux.cabeza.color) ==  'B':
+                    contenido += str(contador) + '. Se volteó la celda de la fila ' + str(listaaux.cabeza.fila) + ' y columna ' + str(listaaux.cabeza.columna) + ' de color negro al color blanco' + '. Costo: Q'+ str(float(costov)) + '\n'
+                    contenidoh += '<h3>' + str(contador) + '. Se volteó la celda de la fila ' + str(listaaux.cabeza.fila) + ' y columna ' + str(listaaux.cabeza.columna) + ' de color negro al color blanco' + '. Costo: Q'+ str(float(costov)) + '</h3>\n'
+                contador += 1
         auxactual = auxactual.siguiente
         actual = listaaux.cabeza
         actual = actual.siguiente  
-        contador = 2      
         while actual != None and auxactual != None:
             if str(actual.color) != str(auxactual.color):
                 if actual.siguiente != None or auxactual.siguiente != None:
@@ -161,19 +180,49 @@ class Lista_Patron:
                             actual.siguiente.anterior = aux   
                         actual.siguiente = aux                                             
                         CostoT += costoi
+                        contenido += str(contador) + '. Se intercambió la celda de la fila ' + str(aux.fila) + ' y columna ' + str(aux.columna) + ' a la fila ' + str(actual.fila) + ' y columna ' + str(actual.columna) + '. Costo: Q'+ str(float(costoi)) + '\n'
+                        contenidoh += '<h3>' + str(contador) + '. Se intercambió la celda de la fila ' + str(aux.fila) + ' y columna ' + str(aux.columna) + ' a la fila ' + str(actual.fila) + ' y columna ' + str(actual.columna) + '. Costo: Q'+ str(float(costoi)) + '</h3>\n'
                     else:
                         actual.color = str(auxactual.color)
                         CostoT += costov
+                        if str(actual.color) == 'W':
+                            contenido += str(contador) + '. Se volteó la celda de la fila ' + str(actual.fila) + ' y columna ' + str(actual.columna) + ' de color blanco al color negro' + '. Costo: Q'+ str(float(costov)) + '\n'
+                            contenidoh += '<h3>' + str(contador) + '. Se volteó la celda de la fila ' + str(actual.fila) + ' y columna ' + str(actual.columna) + ' de color blanco al color negro' + '. Costo: Q'+ str(float(costov)) + '</h3>\n'
+                        elif str(actual.color) ==  'B':
+                            contenido += str(contador) + '. Se volteó la celda de la fila ' + str(actual.fila) + ' y columna ' + str(actual.columna) + ' de color negro al color blanco' + '. Costo: Q'+ str(float(costov)) + '\n'
+                            contenidoh += '<h3>' + str(contador) + '. Se volteó la celda de la fila ' + str(actual.fila) + ' y columna ' + str(actual.columna) + ' de color negro al color blanco' + '. Costo: Q'+ str(float(costov)) + '</h3>\n'
+                    contador += 1
                 else:
                     actual.color = str(auxactual.color)
                     CostoT += costov
+                    if str(actual.color) == 'W':
+                        contenido += str(contador) + '. Se volteó la celda de la fila ' + str(actual.fila) + ' y columna ' + str(actual.columna) + ' de color blanco al color negro' + '. Costo: Q'+ str(float(costov)) + '\n'
+                        contenidoh += '<h3>' + str(contador) + '. Se volteó la celda de la fila ' + str(actual.fila) + ' y columna ' + str(actual.columna) + ' de color blanco al color negro' + '. Costo: Q'+ str(float(costov)) + '</h3>\n'
+                    elif str(actual.color) ==  'B':
+                        contenido += str(contador) + '. Se volteó la celda de la fila ' + str(actual.fila) + ' y columna ' + str(actual.columna) + ' de color negro al color blanco' + '. Costo: Q'+ str(float(costov)) + '\n'
+                        contenidoh += '<h3>' + str(contador) + '. Se volteó la celda de la fila ' + str(actual.fila) + ' y columna ' + str(actual.columna) + ' de color negro al color blanco' + '. Costo: Q'+ str(float(costov)) + '</h3>\n'
+                    contador += 1
             auxactual = auxactual.siguiente
             actual= actual.siguiente
-            contador += 1
-        
+        print('****************************************************')
+        print('**            PATRON RESULTADO DEL PISO           **')
+        print('****************************************************')
         listaaux.mostrarLista()
         self.graficarpatronfinal(listaaux)
-        print('Costo de produccion: ' + str(CostoT))
+        #print(self.contenido)        
+        
 
     def __len__(self):
         return self.tamaño
+
+def obtenerInstrucciones():
+    global contenido
+    return contenido
+
+def ObtenerTotal():
+    global CostoT
+    return CostoT
+
+def ObtenerInstruccioneshtml():
+    global contenidoh
+    return contenidoh

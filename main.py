@@ -1,8 +1,10 @@
 import tkinter as tk
 from tkinter import filedialog
 from xml.etree import ElementTree as et
+from Estructuras.Lista_Patron import ObtenerInstruccioneshtml, ObtenerTotal, obtenerInstrucciones
 
 from Estructuras.Lista_Pisos import Lista_Pisos
+from Reportes import *
 ListaPisos = Lista_Pisos()
 
 #ABRIENDO EL ARCHIVO Y VER SU CONTENIDO
@@ -110,8 +112,43 @@ def MenuOperaciones(npiso,of):
         elif opcion == 2:
             Ci = int(ListaPisos.retornarPiso(npiso).costointercambiar)
             Cv= int(ListaPisos.retornarPiso(npiso).costovoltear)
-            ListaPisos.retornarPiso(npiso).listapatrones.operarPatron(of,Ci,Cv)
+            Reporte(ListaPisos.retornarPiso(npiso), of,Ci,Cv)           
         elif opcion == 3:
+            break
+        else:
+            print('\n== OPCION INVALIDA                                ==')
+
+#GENERAR REPORTES
+def Reporte(Piso, of,Ci,Cv):
+    opcion = 0
+    while int(opcion) != 1 or int(opcion) !=2 or int(opcion) !=3:
+        print('====================================================')
+        print('== 1. Mostrar las instrucciones en consola        ==')
+        print('== 2. Mostrar las instrucciones en un archivo txt ==')
+        print('== 3. Mostrar las instrucciones en un archivo HTML==')
+        print('====================================================')
+        opcion = int(input('== Elija una opción:                              ==\n>'))
+        if opcion == 1:
+            Piso.listapatrones.operarPatron(of,Ci,Cv) 
+            print('\nINSTRUCCIONES DEL PISO ' + str(Piso.nombre) + ':')
+            print(obtenerInstrucciones())
+            print('Costo Total de la Operación: Q' + str(float(ObtenerTotal())))
+            break
+        elif opcion == 2:
+            Piso.listapatrones.operarPatron(of,Ci,Cv) 
+            c = ''
+            c += 'Instrucciones del piso ' + str(Piso.nombre) + ':\n'
+            t = ''
+            t += 'Costo Total de la Operación: Q' + str(float(ObtenerTotal()))
+            generarReportetxt(str(Piso.nombre),str(c + obtenerInstrucciones() + t))
+            print('Costo Total de la Operación: Q' + str(float(ObtenerTotal())))
+            break
+        elif opcion == 3:
+            Piso.listapatrones.operarPatron(of,Ci,Cv) 
+            t = ''
+            t += '<h2>Costo Total de la Operación: Q' + str(float(ObtenerTotal())) + '</h2>'
+            generarReportehtml(str(Piso.nombre),str(ObtenerInstruccioneshtml() + t))
+            print('Costo Total de la Operación: Q' + str(float(ObtenerTotal())))
             break
         else:
             print('\n== OPCION INVALIDA                                ==')
