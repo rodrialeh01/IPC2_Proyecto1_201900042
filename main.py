@@ -144,6 +144,7 @@ def Reporte(Piso, of,Ci,Cv):
             t += 'Costo Total de la Operación: Q' + str(float(ObtenerTotal()))
             generarReportetxt(str(Piso.nombre),str(c + obtenerInstrucciones() + t))
             print('Costo Total de la Operación: Q' + str(float(ObtenerTotal())))
+            print('Archivo generado con éxito')
             break
         elif opcion == 3:
             Piso.listapatrones.operarPatron(of,Ci,Cv) 
@@ -151,6 +152,7 @@ def Reporte(Piso, of,Ci,Cv):
             t += '<h2>Costo Total de la Operación: Q' + str(float(ObtenerTotal())) + '</h2>'
             generarReportehtml(str(Piso.nombre),str(ObtenerInstruccioneshtml() + t))
             print('Costo Total de la Operación: Q' + str(float(ObtenerTotal())))
+            print('Archivo generado con éxito')
             break
         else:
             print('\n== OPCION INVALIDA                                ==')

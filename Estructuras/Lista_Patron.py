@@ -93,6 +93,38 @@ class Lista_Patron:
         os.startfile(rutaa)
         print('Grafica del patron inicial generada con exito')
 
+    def graficarprimero2(self):
+        texto = ''
+        try:
+            os.mkdir('Images/'+str(self.cabeza.codigo))
+        except:
+            pass
+        file = open('Images/'+str(self.cabeza.codigo)+'/_'+str(0)+'.dot','w')
+        texto += '''digraph structs {
+	node [shape=plaintext]
+	patron [label=<
+<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="20">\n'''
+        contx = 0
+        actual1 = self.cabeza.listaceldas.cabeza
+        while(contx <=self.cabeza.listaceldas.tamañofilas()):
+            texto += '''<TR>\n'''
+            conty = 0
+            while(conty <=self.cabeza.listaceldas.tamañocolumnas()):
+                if actual1.color == 'W':
+                    texto += '''<TD></TD>\n'''
+                elif actual1.color == 'B':
+                    texto += '''<TD bgcolor="black"></TD>\n'''
+                conty += 1
+                actual1 = actual1.siguiente
+            texto += '''</TR>'''
+            contx +=1
+        texto += '''</TABLE>>]
+}'''
+        file.write(texto)
+        file.close()
+        os.system('dot -Tpng Images/'+str(self.cabeza.codigo)+'/_'+str(0)+'.dot -o Images/'+str(self.cabeza.codigo)+'/_'+str(0)+'.png')
+
+
     #GRAFICAR EL PATRON RESULTADO
     def graficarpatronfinal(self,lista):
         texto = ''
@@ -124,6 +156,33 @@ class Lista_Patron:
         os.startfile(rutaa)
         print('Se genero el resultado gráfico del patron')
 
+    def graficarextra(self, lista,n):
+        texto = ''
+        file = open('Images/'+str(self.cabeza.codigo)+'/_'+str(n)+'.dot','w')
+        texto += '''digraph structs {
+	node [shape=plaintext]
+	patron [label=<
+<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="20">\n'''
+        contx = 0
+        actual1 = lista.cabeza
+        while(contx <=self.cabeza.listaceldas.tamañofilas()):
+            texto += '''<TR>\n'''
+            conty = 0
+            while(conty <=self.cabeza.listaceldas.tamañocolumnas()):
+                if actual1.color == 'W':
+                    texto += '''<TD></TD>\n'''
+                elif actual1.color == 'B':
+                    texto += '''<TD bgcolor="black"></TD>\n'''
+                conty += 1
+                actual1 = actual1.siguiente
+            texto += '''</TR>'''
+            contx +=1
+        texto += '''</TABLE>>]
+}'''
+        file.write(texto)
+        file.close()
+        os.system('dot -Tpng Images/'+str(self.cabeza.codigo)+'/_'+str(n)+'.dot -o Images/'+str(self.cabeza.codigo)+'/_'+str(n)+'.png')
+
     def operarPatron(self, puntero,costoi, costov):
         global CostoT
         global contenido
@@ -139,7 +198,12 @@ class Lista_Patron:
         contador = 1
         CostoT = 0
         auxactual = destino.cabeza
-        aux2actual = listaaux.cabeza        
+        aux2actual = listaaux.cabeza 
+        self.graficarprimero2()
+        contenidoh = ''
+        contenido = ''
+        contenidoh+='''<h3><center>Patron Inicial<center></h3>\n'''
+        contenidoh+='''<h3><center><img src="Images/'''+ str(self.cabeza.codigo) +'''/_0.png"/><center></h3>\n'''       
         if str(aux2actual.color) != str(auxactual.color):
             if str(aux2actual.siguiente.color) == str(auxactual.color):
                 aux = listaaux.cabeza
@@ -152,6 +216,8 @@ class Lista_Patron:
                 CostoT += costoi
                 contenido += str(contador) + '. Se intercambiaron de posicion la celda ID ' +str(aux.id)+ ' con la celda ID ' + str(listaaux.cabeza.id) +'. Costo: Q'+ str(float(costoi)) + '\n'
                 contenidoh += '<h3>' + str(contador) + '. Se intercambiaron de posicion la celda ID ' +str(aux.id)+ ' con la celda ID ' + str(listaaux.cabeza.id) +'. Costo: Q'+ str(float(costoi)) + '</h3>\n'
+                self.graficarextra(listaaux,contador)
+                contenidoh += '<h3><center><img src="Images/'+ str(self.cabeza.codigo) +'/_'+str(contador)+'.png"/><center></h3>\n'
                 contador += 1
             else:
                 listaaux.cabeza.color = auxactual.color
@@ -162,6 +228,8 @@ class Lista_Patron:
                 elif str(listaaux.cabeza.color) ==  'B':
                     contenido += str(contador) + '. Se volteó la celda ID ' +str(listaaux.cabeza.id)+ ' de color blanco al color negro' + '. Costo: Q'+ str(float(costov)) + '\n'
                     contenidoh += '<h3>' + str(contador) + '. Se volteó la celda ID ' +str(listaaux.cabeza.id)+ ' de color blanco al color negro' + '. Costo: Q'+ str(float(costov)) + '</h3>\n'
+                self.graficarextra(listaaux,contador)
+                contenidoh += '<h3><center><img src="Images/'+ str(self.cabeza.codigo) +'/_'+str(contador)+'.png"/><center></h3>\n'
                 contador += 1
         auxactual = auxactual.siguiente
         actual = listaaux.cabeza
@@ -181,16 +249,22 @@ class Lista_Patron:
                         actual.siguiente = aux                                             
                         CostoT += costoi
                         contenido += str(contador) + '. Se intercambiaron de posicion la celda ID ' +str(aux.id)+ ' con la celda ID ' + str(actual.id) +'. Costo: Q'+ str(float(costoi)) + '\n'
-                        contenidoh += '<h3>' + str(contador) + '. Se intercambiaron de posicion la celda ID ' +str(aux.id)+ ' con la celda ID ' + str(listaaux.cabeza.id) + '. Costo: Q'+ str(float(costoi)) + '</h3>\n'
+                        contenidoh += '<h3>' + str(contador) + '. Se intercambiaron de posicion la celda ID ' +str(aux.id)+ ' con la celda ID ' + str(actual.id) + '. Costo: Q'+ str(float(costoi)) + '</h3>\n'
+                        self.graficarextra(listaaux,contador)
+                        contenidoh += '<h3><center><img src="Images/'+ str(self.cabeza.codigo) +'/_'+str(contador)+'.png"/><center></h3>\n'
                     else:
                         actual.color = str(auxactual.color)
                         CostoT += costov
                         if str(actual.color) == 'W':
                             contenido += str(contador) + '. Se volteó la celda ID ' +str(actual.id)+ ' de color negro al color blanco' + '. Costo: Q'+ str(float(costov)) + '\n'
                             contenidoh += '<h3>' + str(contador) + '. Se volteó la celda ID ' +str(actual.id)+ ' de color negro al color blanco' + '. Costo: Q'+ str(float(costov)) + '</h3>\n'
+                            self.graficarextra(listaaux,contador)
+                            contenidoh += '<h3><center><img src="Images/'+ str(self.cabeza.codigo) +'/_'+str(contador)+'.png"/><center></h3>\n'
                         elif str(actual.color) ==  'B':
                             contenido += str(contador) + '. Se volteó la celda ID ' +str(actual.id)+ ' de color blanco al color negro' + '. Costo: Q'+ str(float(costov)) + '\n'
                             contenidoh += '<h3>' + str(contador) + '. Se volteó la celda ID ' +str(actual.id)+ ' de color blanco al color negro' + '. Costo: Q'+ str(float(costov)) + '</h3>\n'
+                            self.graficarextra(listaaux,contador)
+                            contenidoh += '<h3><center><img src="Images/'+ str(self.cabeza.codigo) +'/_'+str(contador)+'.png"/><center></h3>\n'
                     contador += 1
                 else:
                     actual.color = str(auxactual.color)
@@ -198,9 +272,13 @@ class Lista_Patron:
                     if str(actual.color) == 'W':
                         contenido += str(contador) + '. Se volteó la celda ID ' +str(actual.id)+ ' de color negro al color blanco' + '. Costo: Q'+ str(float(costov)) + '\n'
                         contenidoh += '<h3>' + str(contador) + '. Se volteó la celda ID ' +str(actual.id)+ ' de color negro al color blanco' + '. Costo: Q'+ str(float(costov)) + '</h3>\n'
+                        self.graficarextra(listaaux,contador)
+                        contenidoh += '<h3><center><img src="Images/'+ str(self.cabeza.codigo) +'/_'+str(contador)+'.png"/><center></h3>\n'
                     elif str(actual.color) ==  'B':
                         contenido += str(contador) + '. Se volteó la celda ID ' +str(actual.id)+ ' de color blanco al color negro' + '. Costo: Q'+ str(float(costov)) + '\n'
                         contenidoh += '<h3>' + str(contador) + '. Se volteó la celda ID ' +str(actual.id)+ ' de color blanco al color negro' + '. Costo: Q'+ str(float(costov)) + '</h3>\n'
+                        self.graficarextra(listaaux,contador)
+                        contenidoh += '<h3><center><img src="Images/'+ str(self.cabeza.codigo) +'/_'+str(contador)+'.png"/><center></h3>\n'
                     contador += 1
             auxactual = auxactual.siguiente
             actual= actual.siguiente

@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <pisosArtesanales>
-    <piso nombre="4">
+    <piso nombre="Piso 1">
         <R>5</R>
         <C>2</C>
         <F>1</F>
@@ -14,7 +14,7 @@
             </patron>
         </patrones>
     </piso>
-    <piso nombre="1">
+    <piso nombre="Riso 2">
         <R>4</R>
         <C>1</C>
         <F>1</F>
@@ -28,7 +28,7 @@
             </patron>
         </patrones>
     </piso>
-    <piso nombre="3">
+    <piso nombre="Aiso 3">
         <R>4</R>
         <C>4</C>
         <F>1000</F>
@@ -45,7 +45,7 @@
             </patron>
         </patrones>
     </piso>
-    <piso nombre="2">
+    <piso nombre="Biso 4">
         <R>2</R>
         <C>4</C>
         <F>2000</F>
