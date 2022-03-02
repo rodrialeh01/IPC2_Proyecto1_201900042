@@ -46,7 +46,7 @@ def MenuPisos():
     while opcion != (len(ListaPisos)+1):
         try:
             ListaPisos.menuPisos()
-            print(str(len(ListaPisos)+1)+'. Salir al Menú Principal')
+            print(str(len(ListaPisos)+1)+'. Salir del Menú de Pisos')
             opcionp = int(input('== Elija una opción:                              ==\n>'))
             if ListaPisos.retornarInfoPiso(opcionp) != None:
                 MenuPatrones(opcionp)
