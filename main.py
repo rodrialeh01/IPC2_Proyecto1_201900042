@@ -165,13 +165,29 @@ def menuAnalizar():
         print('====================================================')
         opcion = int(input('== Elija una opción:                              ==\n>'))
         if opcion == 1:
-            pass
+            Ordenamiento()
         elif opcion == 2:
             MenuPisos()
         elif opcion == 3:
             break
         else:
             print('\n== OPCION INVALIDA                                ==')
+
+def Ordenamiento():
+    global ListaPisos
+    listaTemporal = Lista_Pisos()
+    actual = ListaPisos.cabeza
+    while(actual != None):
+        listaTemporal.InsertaralFinal(actual.nombre,actual.fila,actual.columna,actual.costovoltear,actual.costointercambiar)
+        listaTemporal.cola.listapatrones = actual.listapatrones
+        actual = actual.siguiente
+    print('====================================================')
+    print('==          LISTADO DE PISOS DISPONIBLES          ==')
+    listaTemporal.ordenamiento()
+    for i in range(len(listaTemporal)):
+        listaTemporal.ordenarlistapatrones(i+1)
+    listaTemporal.mostrarPisos()
+    #listaTemporal.
 
 #OBTENER LA RUTA DEL ARCHIVO
 def ruta():

@@ -6,38 +6,38 @@
         <F>1</F>
         <S>1</S>
         <patrones>
-            <patron codigo="cod11">
+            <patron codigo="f">
                 WBWBWWWB
             </patron>
-            <patron codigo="cod12">
+            <patron codigo="a">
                 BWBWWWWW
             </patron>
         </patrones>
     </piso>
-    <piso nombre="ejemplo02">
+    <piso nombre="ajemplo02">
         <R>3</R>
         <C>3</C>
         <F>1</F>
         <S>1</S>
         <patrones>
-            <patron codigo="cod21">
+            <patron codigo="p">
                 WBBBWBWWW
             </patron>
-            <patron codigo="cod22">
+            <patron codigo="q">
                 WWWWBWWWB
             </patron>
         </patrones>
     </piso>
-    <piso nombre="ejemplo03">
+    <piso nombre="ebemplo03">
         <R>1</R>
         <C>5</C>
         <F>1000</F>
         <S>1</S>
         <patrones>
-            <patron codigo="cod31">
+            <patron codigo="z">
                 WBBBB
             </patron>
-            <patron codigo="cod32">
+            <patron codigo="a">
                 BBBWW
             </patron>
         </patrones>

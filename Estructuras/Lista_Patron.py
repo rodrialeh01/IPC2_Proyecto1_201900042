@@ -211,6 +211,32 @@ class Lista_Patron:
         self.graficarpatronfinal(listaaux)
         #print(self.contenido)        
         
+    def mostrarPatrones(self):
+        actual = self.cabeza
+        while(actual != None):
+            print('\t\t>>Código del Patron: ' + str(actual.codigo))
+            print('\t\t>>CONTIENE LAS SIGUIENTES CELDAS: ')
+            actual.listaceldas.mostrarCeldas()
+            print('\t\t*********************************************')
+            actual = actual.siguiente
+
+    def ordenamiento(self):
+        actual = self.cabeza
+        aux = self.cabeza
+        if actual.siguiente != None and aux != None:
+            i = self.cabeza
+            while i != None:
+                j = i.siguiente
+                while j != None:
+                    if(int(ord(i.codigo[0].upper())) > int(ord(j.codigo[0].upper()))):
+                        temporal1 = i.codigo
+                        temporal2 = i.listaceldas
+                        i.codigo = j.codigo
+                        i.listaceldas = j.listaceldas
+                        j.codigo = temporal1
+                        j.listaceldas = temporal2
+                    j =j.siguiente
+                i = i.siguiente
 
     def __len__(self):
         return self.tamaño

@@ -46,5 +46,14 @@ class Lista_Celdas:
                 #print('Color: ', actual.color)
                 actual = actual.siguiente
 
+    def mostrarCeldas(self):
+        actual = self.cabeza
+        while(actual != None):
+            print('\t\t\t>>> ID:' + str(actual.id))
+            print('\t\t\t\t>>> Color: ' + str(actual.color))
+            print('\t\t\t\t>>> Fila: ' + str(actual.fila))
+            print('\t\t\t\t>>> Columna: ' + str(actual.columna))
+            actual = actual.siguiente
+
     def __len__(self):
         return int(self.tamaño)

@@ -1,8 +1,0 @@
-Instrucciones del piso ejemplo02:
-1. Se volteó la celda ID 2 de color negro al color blanco. Costo: Q1.0
-2. Se volteó la celda ID 3 de color negro al color blanco. Costo: Q1.0
-3. Se intercambiaron de posicion la celda ID 4 con la celda ID 5. Costo: Q1.0
-4. Se intercambiaron de posicion la celda ID 6 con la celda ID 7. Costo: Q1.0
-5. Se intercambiaron de posicion la celda ID 6 con la celda ID 8. Costo: Q1.0
-6. Se intercambiaron de posicion la celda ID 6 con la celda ID 9. Costo: Q1.0
-Costo Total de la Operación: Q6.0
