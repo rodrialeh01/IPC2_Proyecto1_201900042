@@ -205,20 +205,56 @@ class Lista_Patron:
         contenidoh+='''<h3><center>Patron Inicial<center></h3>\n'''
         contenidoh+='''<h3><center><img src="Images/'''+ str(self.cabeza.codigo) +'''/_0.png"/><center></h3>\n'''       
         if str(aux2actual.color) != str(auxactual.color):
+            #MOVIMIENTO A LA DERECHA
             if str(aux2actual.siguiente.color) == str(auxactual.color):
-                aux = listaaux.cabeza
-                listaaux.cabeza = listaaux.cabeza.siguiente
-                aux.anterior = listaaux.cabeza
-                aux.siguiente = listaaux.cabeza.siguiente
-                listaaux.cabeza.siguiente.anterior = aux
-                listaaux.cabeza.siguiente = aux
-                listaaux.cabeza.anterior = None
-                CostoT += costoi
-                contenido += str(contador) + '. Se intercambiaron de posicion la celda ID ' +str(aux.id)+ ' con la celda ID ' + str(listaaux.cabeza.id) +'. Costo: Q'+ str(float(costoi)) + '\n'
-                contenidoh += '<h3>' + str(contador) + '. Se intercambiaron de posicion la celda ID ' +str(aux.id)+ ' con la celda ID ' + str(listaaux.cabeza.id) +'. Costo: Q'+ str(float(costoi)) + '</h3>\n'
-                self.graficarextra(listaaux,contador)
-                contenidoh += '<h3><center><img src="Images/'+ str(self.cabeza.codigo) +'/_'+str(contador)+'.png"/><center></h3>\n'
-                contador += 1
+                if str(listaaux.cabeza.color) != str(listaaux.cabeza.siguiente.color):
+                    aux = listaaux.cabeza
+                    listaaux.cabeza = listaaux.cabeza.siguiente
+                    aux.anterior = listaaux.cabeza
+                    aux.siguiente = listaaux.cabeza.siguiente
+                    listaaux.cabeza.siguiente.anterior = aux
+                    listaaux.cabeza.siguiente = aux
+                    listaaux.cabeza.anterior = None
+                    CostoT += costoi
+                    contenido += str(contador) + '. Se intercambiaron de posicion la celda ID ' +str(aux.id)+ ' con la celda ID ' + str(listaaux.cabeza.id) +'. Costo: Q'+ str(float(costoi)) + '\n'
+                    contenidoh += '<h3>' + str(contador) + '. Se intercambiaron de posicion la celda ID ' +str(aux.id)+ ' con la celda ID ' + str(listaaux.cabeza.id) +'. Costo: Q'+ str(float(costoi)) + '</h3>\n'
+                    self.graficarextra(listaaux,contador)
+                    contenidoh += '<h3><center><img src="Images/'+ str(self.cabeza.codigo) +'/_'+str(contador)+'.png"/><center></h3>\n'
+                    contador += 1
+                else:
+                    listaaux.cabeza.color = auxactual.color
+                    CostoT += costov
+                    if str(listaaux.cabeza.color) == 'W':
+                        contenido += str(contador) + '. Se volteó la celda ID ' +str(listaaux.cabeza.id)+ ' de color negro al color blanco' + '. Costo: Q'+ str(float(costov)) + '\n'
+                        contenidoh += '<h3>' + str(contador) + '. Se volteó la celda ID ' +str(listaaux.cabeza.id)+ ' de color negro al color blanco' + '. Costo: Q'+ str(float(costov)) + '</h3>\n'
+                    elif str(listaaux.cabeza.color) ==  'B':
+                        contenido += str(contador) + '. Se volteó la celda ID ' +str(listaaux.cabeza.id)+ ' de color blanco al color negro' + '. Costo: Q'+ str(float(costov)) + '\n'
+                        contenidoh += '<h3>' + str(contador) + '. Se volteó la celda ID ' +str(listaaux.cabeza.id)+ ' de color blanco al color negro' + '. Costo: Q'+ str(float(costov)) + '</h3>\n'
+                    self.graficarextra(listaaux,contador)
+                    contenidoh += '<h3><center><img src="Images/'+ str(self.cabeza.codigo) +'/_'+str(contador)+'.png"/><center></h3>\n'
+                    contador += 1
+            #MOVIMIENTO HACIA ABAJO
+            elif (int(listaaux.cola.fila) > 0 and int(listaaux.cola.columna)> 0):
+                aux2 = listaaux.retornarcelda(1,0)
+                comparacion = destino.retornarcelda(1,0)
+                if str(aux2.color) == str(comparacion.color):                    
+                    aux = listaaux.cabeza
+                    listaaux.cabeza = aux2
+                    aux.anterior = listaaux.cabeza.anterior
+                    listaaux.cabeza.anterior.siguiente = aux
+                    aux3 = listaaux.cabeza.siguiente
+                    listaaux.cabeza.siguiente = aux.siguiente
+                    listaaux.cabeza.siguiente.anterior = listaaux.cabeza
+                    aux.siguiente = aux3
+                    aux3.anterior = aux
+                    listaaux.cabeza.anterior = None
+                    CostoT += costoi
+                    contenido += str(contador) + '. Se intercambiaron de posicion la celda ID ' +str(aux.id)+ ' con la celda ID ' + str(listaaux.cabeza.id) +'. Costo: Q'+ str(float(costoi)) + '\n'
+                    contenidoh += '<h3>' + str(contador) + '. Se intercambiaron de posicion la celda ID ' +str(aux.id)+ ' con la celda ID ' + str(listaaux.cabeza.id) +'. Costo: Q'+ str(float(costoi)) + '</h3>\n'
+                    self.graficarextra(listaaux,contador)
+                    contenidoh += '<h3><center><img src="Images/'+ str(self.cabeza.codigo) +'/_'+str(contador)+'.png"/><center></h3>\n'
+                    contador += 1
+            #VOLTEAR
             else:
                 listaaux.cabeza.color = auxactual.color
                 CostoT += costov
@@ -237,7 +273,8 @@ class Lista_Patron:
         while actual != None and auxactual != None:
             if str(actual.color) != str(auxactual.color):
                 if actual.siguiente != None or auxactual.siguiente != None:
-                    if str(actual.siguiente.color) == str(auxactual.color):
+                    #MOVIMIENTO A LA DERECHA
+                    if str(actual.siguiente.color) == str(auxactual.color) and int(actual.siguiente.columna) != 0 and str(actual.color) != str(actual.siguiente.color):
                         aux = actual
                         actual = actual.siguiente
                         actual.anterior = aux.anterior
@@ -252,6 +289,29 @@ class Lista_Patron:
                         contenidoh += '<h3>' + str(contador) + '. Se intercambiaron de posicion la celda ID ' +str(aux.id)+ ' con la celda ID ' + str(actual.id) + '. Costo: Q'+ str(float(costoi)) + '</h3>\n'
                         self.graficarextra(listaaux,contador)
                         contenidoh += '<h3><center><img src="Images/'+ str(self.cabeza.codigo) +'/_'+str(contador)+'.png"/><center></h3>\n'
+                    #MOVIMIENTO HACIA ABAJO
+                    elif(str(actual.color) == str(destino.retornarcelda(int(auxactual.fila)+1,int(auxactual.columna)).color)):
+                        auxi = actual
+                        auxc = listaaux.retornarcelda(int(actual.fila) + 1, int(actual.columna))
+                        aux1c = listaaux.retornarcelda(int(actual.fila) + 1, int(actual.columna)).anterior
+                        aux2c = listaaux.retornarcelda(int(actual.fila) + 1, int(actual.columna)).siguiente
+                        actual = auxc
+                        actual.anterior = auxi.anterior
+                        actual.siguiente = auxi.siguiente
+                        auxi.anterior.siguiente = actual
+                        auxi.siguiente.anterior = actual
+                        auxi.anterior = aux1c
+                        aux1c.siguiente = auxi
+                        auxi.siguiente = aux2c
+                        if aux2c != None:
+                            aux2c.anterior = auxi
+                        auxc = auxi
+                        CostoT += costoi
+                        contenido += str(contador) + '. Se intercambiaron de posicion la celda ID ' +str(auxi.id)+ ' con la celda ID ' + str(actual.id) +'. Costo: Q'+ str(float(costoi)) + '\n'
+                        contenidoh += '<h3>' + str(contador) + '. Se intercambiaron de posicion la celda ID ' +str(auxi.id)+ ' con la celda ID ' + str(actual.id) + '. Costo: Q'+ str(float(costoi)) + '</h3>\n'
+                        self.graficarextra(listaaux,contador)
+                        contenidoh += '<h3><center><img src="Images/'+ str(self.cabeza.codigo) +'/_'+str(contador)+'.png"/><center></h3>\n'
+                #VOLTEAR CELDA
                     else:
                         actual.color = str(auxactual.color)
                         CostoT += costov

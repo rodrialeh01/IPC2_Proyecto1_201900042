@@ -55,5 +55,12 @@ class Lista_Celdas:
             print('\t\t\t\t>>> Columna: ' + str(actual.columna))
             actual = actual.siguiente
 
+    def retornarcelda(self,fila,columna):
+        actual = self.cabeza
+        while(actual != None):
+            if int(actual.fila) == int(fila) and int(actual.columna) == int(columna):
+                return actual
+            actual = actual.siguiente
+
     def __len__(self):
         return int(self.tamaño)
