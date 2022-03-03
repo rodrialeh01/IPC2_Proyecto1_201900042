@@ -1,13 +1,19 @@
+#IMPORTANDO EL NODO PISO
 from .NodoPiso import NodoPiso
+
+#CLASE DE LISTA DE PISO
 class Lista_Pisos:
+    #CONSTRUCTOR
     def __init__(self):
         self.cabeza = None
         self.cola = None
         self.tamaño = 0
 
+    #FUNCION PARA VERIFICAR SI ESTA VACIA LA LISTA
     def Vacio(self):
         return self.cabeza == self.cola == None
 
+    #METODO PARA INSERTAR UN NUEVO NODO A LA LISTA
     def InsertaralFinal(self,nombre,fila,columna, f,s):
         nuevoPiso = NodoPiso(nombre,fila,columna,f,s)
         if self.Vacio():
@@ -20,6 +26,7 @@ class Lista_Pisos:
             self.cola = nuevoPiso
         self.tamaño = self.tamaño +1
 
+    #METODO PARA MOSTRAR LA LISTA DE PISOS
     def mostrarLista(self):
         Actual = self.cabeza
         while(Actual != None):
@@ -33,6 +40,7 @@ class Lista_Pisos:
             Actual.verPatron()
             Actual = Actual.siguiente
 
+    #METODO PARA MOSTRAR EL MENU DE PISOS
     def menuPisos(self):
         Actual = self.cabeza
         contador = 1
@@ -44,6 +52,7 @@ class Lista_Pisos:
             Actual = Actual.siguiente
             contador +=1
 
+    #FUNCION PARA RETORNAR LOS DATOS DEL PISO
     def retornarInfoPiso(self, puntero):
         actual = self.cabeza
         datos = ''
@@ -53,7 +62,8 @@ class Lista_Pisos:
                 return datos
             actual = actual.siguiente
         return None
-        
+
+    #FUNCION PARA RETORNAR EL NODO        
     def retornarPiso(self, puntero):
         actual = self.cabeza
         for i in range(self.tamaño):
@@ -62,6 +72,7 @@ class Lista_Pisos:
             actual = actual.siguiente
         return None
 
+    #METODO PARA ORDENAR LA LISTA EN ORDEN ALFABETICO POR MEDIO DEL ORDENAMIENTO DE INSERCION
     def ordenamiento(self):
         actual = self.cabeza
         aux = self.cabeza
@@ -92,11 +103,12 @@ class Lista_Pisos:
                     j = j.siguiente
                 i = i.siguiente
 
+    #METODO PARA ORDENAR LOS PATRONES EN ORDEN ALFABETICO
     def ordenarlistapatrones(self, puntero):
         actual = self.retornarPiso(puntero)
         actual.listapatrones.ordenamiento()
 
-
+    #METODO PARA MOSTRAR LOS PISOS
     def mostrarPisos(self):
         actual = self.cabeza
         while(actual != None):
@@ -110,5 +122,6 @@ class Lista_Pisos:
             actual.listapatrones.mostrarPatrones()
             actual = actual.siguiente
 
+    #FUNCION PARA MOSTRAR LA LONGITUD DE LA LISTA
     def __len__(self):
         return self.tamaño

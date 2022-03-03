@@ -1,3 +1,4 @@
+#CLASE NODO DE CELDA
 class NodoCelda():
     def __init__(self,id, fila, columna, color):
         self.id = id

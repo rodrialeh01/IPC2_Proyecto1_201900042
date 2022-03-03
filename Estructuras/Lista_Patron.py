@@ -1,19 +1,31 @@
+#IMPORTANDO EL NODO DE LOS PATRONES Y LA CLASE DE LA LISTA DE CELDAS
 from .NodoPatron import NodoPatron
 from .Lista_Celdas import Lista_Celdas
+
+#IMPORTANDO LA LIBRERIA OS PARA LAS GRAFICAS DE GRAPHVIZ
 import os
 
+#CREANDO VARIABLES GLOBALES PARA LOS REPORTES:
+#ESTA VARIABLE ES PARA ALMACENAR EL TEXTO DE LAS INSTRUCCIONES EN EL TXT
 contenido = ''
+#ESTA VARIABLE ES PARA ALMACENAR EL TEXTO DE LAS INSTRUCCIONES EN EL HTML
 contenidoh = ''
+#ESTA VARIABLE ES EL COSTO TOTAL DE LA PRODUCCION
 CostoT = 0
+
+#CLASE DE LA LISTA DE PATRONES
 class Lista_Patron:
+    #CONSTRUCTOR
     def __init__(self):
         self.cabeza = None
         self.cola = None
         self.tamaño = 0
 
+    #FUNCION PARA VERIFICAR SI LA LISTA ESTA VACIA
     def Vacio(self):
         return self.cabeza == self.cola == None
 
+    #METODO PARA INSERTAR NODOS POR MEDIO DE LA INSERCION AL FINAL
     def InsertaralFinal(self,codigo):
         nuevoPatron = NodoPatron(codigo)
         if self.Vacio():
@@ -26,6 +38,7 @@ class Lista_Patron:
             self.cola = nuevoPatron
         self.tamaño = self.tamaño+1
 
+    #METODO PARA MOSTRAR LA LISTA DE PATRONES
     def mostrarLista(self):
         actual = self.cabeza
         for i in range(self.tamaño):
@@ -36,6 +49,7 @@ class Lista_Patron:
             print('--------------------------------------------------')
             actual = actual.siguiente
 
+    #METODO PARA MOSTRAR EL MENU DE PATRONES
     def MenuPatrones(self):
         Actual = self.cabeza.siguiente
         contador = 1
@@ -44,6 +58,7 @@ class Lista_Patron:
             Actual = Actual.siguiente
             contador +=1
 
+    #METODO PARA RETORNAR LA INFORMACION DEL PATRON POR MEDIO DEL CODIGO
     def retornarInfoPatron(self, puntero):
         actual = self.cabeza
         datos = ''
@@ -54,6 +69,7 @@ class Lista_Patron:
             actual = actual.siguiente
         return None
 
+    #METODO PARA RETORNAR EL NODO PATRON
     def retornarPatron(self, puntero):
         actual = self.cabeza
         for i in range(self.tamaño):
@@ -62,7 +78,7 @@ class Lista_Patron:
             actual = actual.siguiente
         return None
 
-    #GRAFICA EL PRIMER PATRON
+    #METODO PARA GRAFICAR EL PRIMER PATRON
     def graficarprimero(self):
         texto = ''
         file = open('PatronesGraficados/Patron_'+str(self.cabeza.codigo)+'.dot','w')
@@ -93,6 +109,7 @@ class Lista_Patron:
         os.startfile(rutaa)
         print('Grafica del patron inicial generada con exito')
 
+    #METODO PARA VOLVER A GRAFICAR EL PRIMER PATRON PERO PARA EL REPORTE DE HTML
     def graficarprimero2(self):
         texto = ''
         try:
@@ -125,7 +142,7 @@ class Lista_Patron:
         os.system('dot -Tpng Images/'+str(self.cabeza.codigo)+'/_'+str(0)+'.dot -o Images/'+str(self.cabeza.codigo)+'/_'+str(0)+'.png')
 
 
-    #GRAFICAR EL PATRON RESULTADO
+    #METODO PARA GRAFICAR EL RESULTADO DE LAS OPERACIONES DEL PATRON
     def graficarpatronfinal(self,lista):
         texto = ''
         file = open('PatronesGraficados/PatronResultado_'+str(self.cabeza.codigo)+'.dot','w')
@@ -156,6 +173,7 @@ class Lista_Patron:
         os.startfile(rutaa)
         print('Se genero el resultado gráfico del patron')
 
+    #METODO PARA GRAFICAR CADA PASO DE LAS OPERACION HECHA CON LOS PATRONES Y ALMACENARLO EN UNA CARPETA PARA EL REPORTE DE HTML
     def graficarextra(self, lista,n):
         texto = ''
         file = open('Images/'+str(self.cabeza.codigo)+'/_'+str(n)+'.dot','w')
@@ -183,6 +201,7 @@ class Lista_Patron:
         file.close()
         os.system('dot -Tpng Images/'+str(self.cabeza.codigo)+'/_'+str(n)+'.dot -o Images/'+str(self.cabeza.codigo)+'/_'+str(n)+'.png')
 
+    #METODO PARA REALIZAR LAS OPERACIONES DE MOVIMIENTOS DE LAS CELDAS
     def operarPatron(self, puntero,costoi, costov):
         global CostoT
         global contenido
@@ -311,7 +330,7 @@ class Lista_Patron:
                         contenidoh += '<h3>' + str(contador) + '. Se intercambiaron de posicion la celda ID ' +str(auxi.id)+ ' con la celda ID ' + str(actual.id) + '. Costo: Q'+ str(float(costoi)) + '</h3>\n'
                         self.graficarextra(listaaux,contador)
                         contenidoh += '<h3><center><img src="Images/'+ str(self.cabeza.codigo) +'/_'+str(contador)+'.png"/><center></h3>\n'
-                #VOLTEAR CELDA
+                    #VOLTEAR CELDA
                     else:
                         actual.color = str(auxactual.color)
                         CostoT += costov
@@ -326,6 +345,7 @@ class Lista_Patron:
                             self.graficarextra(listaaux,contador)
                             contenidoh += '<h3><center><img src="Images/'+ str(self.cabeza.codigo) +'/_'+str(contador)+'.png"/><center></h3>\n'
                     contador += 1
+                #VOLTEAR CELDA
                 else:
                     actual.color = str(auxactual.color)
                     CostoT += costov
@@ -342,13 +362,14 @@ class Lista_Patron:
                     contador += 1
             auxactual = auxactual.siguiente
             actual= actual.siguiente
+        #MUESTRA LAS CELDAS DEL RESULTADO DEL PATRON DEL PISO
         print('****************************************************')
         print('**            PATRON RESULTADO DEL PISO           **')
         print('****************************************************')
         listaaux.mostrarLista()
-        self.graficarpatronfinal(listaaux)
-        #print(self.contenido)        
+        self.graficarpatronfinal(listaaux)   
         
+    #METODO PARA MOSTRAR EL LISTADO DE PATRONES
     def mostrarPatrones(self):
         actual = self.cabeza
         while(actual != None):
@@ -358,6 +379,7 @@ class Lista_Patron:
             print('\t\t*********************************************')
             actual = actual.siguiente
 
+    #METODO PARA EL ORDENAMIENTO DE INSERCION DE PATRONES
     def ordenamiento(self):
         actual = self.cabeza
         aux = self.cabeza
@@ -376,17 +398,21 @@ class Lista_Patron:
                     j =j.siguiente
                 i = i.siguiente
 
+    #FUNCION PARA EL TAMAÑO DE LA LISTA
     def __len__(self):
         return self.tamaño
 
+#FUNCION PARA RETORNAR EL TEXTO DE LAS INSTRUCCIONES EN TXT
 def obtenerInstrucciones():
     global contenido
     return contenido
 
+#FUNCION PARA RETORNAR EL COSTO TOTAL DE LA PRODUCCION
 def ObtenerTotal():
     global CostoT
     return CostoT
 
+#FUNCION PARA RETORNAR EL TEXTO DE LAS INSTRUCCIONES EN HTML
 def ObtenerInstruccioneshtml():
     global contenidoh
     return contenidoh

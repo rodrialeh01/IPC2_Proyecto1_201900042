@@ -1,11 +1,12 @@
 import os
-
+#METODO PARA GENERAR UN ARCHIVO TXT DE INSTRUCCIONES
 def generarReportetxt(nombrep, ins):
     archivo = open('Instrucciones del piso ' + str(nombrep) + '.txt','w', encoding='utf-8')
     archivo.write(str(ins))
     archivo.close()
     os.startfile('Instrucciones del piso ' + str(nombrep) + '.txt')
 
+#METODO PARA GENERAR UN ARCHIVO HTML DE INSTRUCCIONES
 def generarReportehtml(nombrep, instrucciones):
     contenido = ''
     contenido += '''<!doctype html>

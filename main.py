@@ -1,10 +1,18 @@
+#IMPORTANDO LA LIBRERIA TKINTER PARA PODER CARGAR LA RUTA DEL ARCHIVO
 import tkinter as tk
 from tkinter import filedialog
-from xml.etree import ElementTree as et
-from Estructuras.Lista_Patron import ObtenerInstruccioneshtml, ObtenerTotal, obtenerInstrucciones
 
+#IMPORTANDO LA LIBRERIA DE ELEMENT-TREE PARA LEER EL ARCHIVO XML
+from xml.etree import ElementTree as et
+
+#IMPORTANDO LAS LISTAS Y SUS METODOS
+from Estructuras.Lista_Patron import ObtenerInstruccioneshtml, ObtenerTotal, obtenerInstrucciones
 from Estructuras.Lista_Pisos import Lista_Pisos
+
+#IMPORTANDO EL ARCHIVO DE REPORTES
 from Reportes import *
+
+#CREANDO UNA VARIABLE GLOBAL PARA PODER UTILIZAR LA LISTA DE PISOS EN TODOS LOS METODOS
 ListaPisos = Lista_Pisos()
 
 #ABRIENDO EL ARCHIVO Y VER SU CONTENIDO
@@ -157,6 +165,7 @@ def Reporte(Piso, of,Ci,Cv):
         else:
             print('\n== OPCION INVALIDA                                ==')
 
+#METODO PARA MOSTRAR UN MENU DE ACCIONES AL SELECCIONAR LA OPCION DE PROCESAR ARCHIVO
 def menuAnalizar():
     opcion = 0
     while int(opcion) != 1 or int(opcion) !=2 or int(opcion) !=3:
@@ -175,6 +184,7 @@ def menuAnalizar():
         else:
             print('\n== OPCION INVALIDA                                ==')
 
+#METODO PARA MOSTRAR LOS DATOS DEL ARCHIVO EN FORMA ORDENADA
 def Ordenamiento():
     global ListaPisos
     listaTemporal = Lista_Pisos()
@@ -189,7 +199,6 @@ def Ordenamiento():
     for i in range(len(listaTemporal)):
         listaTemporal.ordenarlistapatrones(i+1)
     listaTemporal.mostrarPisos()
-    #listaTemporal.
 
 #OBTENER LA RUTA DEL ARCHIVO
 def ruta():
@@ -232,4 +241,5 @@ def menu():
         except:
             print('\n== OPCION INVALIDA                                ==')
 
+#LLAMANDO AL MENU PRINCIPAL
 menu()
