@@ -379,7 +379,7 @@ class Lista_Patron:
             print('\t\t*********************************************')
             actual = actual.siguiente
 
-    #METODO PARA EL ORDENAMIENTO DE INSERCION DE PATRONES
+    #METODO PARA EL ORDENAMIENTO BURBUJA DE PATRONES
     def ordenamiento(self):
         actual = self.cabeza
         aux = self.cabeza

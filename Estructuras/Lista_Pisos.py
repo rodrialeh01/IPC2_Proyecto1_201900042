@@ -72,7 +72,7 @@ class Lista_Pisos:
             actual = actual.siguiente
         return None
 
-    #METODO PARA ORDENAR LA LISTA EN ORDEN ALFABETICO POR MEDIO DEL ORDENAMIENTO DE INSERCION
+    #METODO PARA ORDENAR LA LISTA EN ORDEN ALFABETICO POR MEDIO DEL ORDENAMIENTO BURBUJA
     def ordenamiento(self):
         actual = self.cabeza
         aux = self.cabeza
